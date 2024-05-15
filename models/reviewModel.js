@@ -5,23 +5,27 @@ const reviewSchema = mongoose.Schema(
     time: {
       type: String,
       required: true,
+      enum: ["Morning", "Afternoon", "Evening", "Night"],
     },
     rating: {
       type: Number,
       required: true,
       default: 0,
+      min: 0,
+      max: 5,
     },
     looksNew: {
       type: Number,
       required: true,
+      enum: ["Yes", "No"],
     },
     pros: {
       type: String,
-      required: false,
+      required: true,
     },
     cons: {
       type: String,
-      required: false,
+      required: true,
     },
   },
   { timestamps: true }
