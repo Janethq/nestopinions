@@ -1,0 +1,13 @@
+.star-rating {
+  display: flex;
+  justify-content: space-between;
+}
+
+.star {
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.star.active {
+  color: #ffd700; /* golden yellow */
+}
