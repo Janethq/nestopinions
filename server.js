@@ -15,16 +15,19 @@ app.use(cors());
 
 // Configure static middleware
 // to serve from the production 'build' folder
-app.use(express.static(path.join(__dirname, "dist")));
+// app.use(express.static(path.join(__dirname, "dist"))); //dist folder was deleted
+app.use(express.static(path.join(__dirname, "/public")));
 
 // Put API routes here, before the "catch all" route
 // app.get("/api", (req, res) => {res.json({ hello: "world" });}); //for testing
+app.use("/", require("./routes/api/root"));
 app.use("/api/users", require("./routes/api/usersRoutes"));
 
 // The following "catch all" route (note the *) is necessary
-// to return the index.html on all non-AJAX requests
+// to return the index.html on all non-AJAX requests //generic
 app.get("/*", function (req, res) {
-  res.sendFile(path.join(__dirname, "dist", "index.html"));
+  // res.sendFile(path.join(__dirname, "dist", "index.html")); //dist folder was deleted
+  res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
 const port = process.env.PORT || 3000;
