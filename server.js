@@ -3,6 +3,7 @@ const path = require("path");
 const logger = require("morgan");
 const debug = require("debug")("mern:server");
 const cors = require("cors"); //for security
+const corsOptions = require("./config/corsOptions");
 // Always require and configure near the top
 require("dotenv").config();
 require("./config/database");
@@ -11,7 +12,7 @@ const app = express();
 
 app.use(logger("dev"));
 app.use(express.json());
-app.use(cors());
+app.use(cors(corsOptions));
 
 // Configure static middleware
 // to serve from the production 'build' folder
