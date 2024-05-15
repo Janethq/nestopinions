@@ -4,8 +4,11 @@ import { Route, Routes } from "react-router-dom";
 import NavBar from "../../components/NavBar/NavBar";
 import { getUser } from "../../utilities/users-service";
 import AuthPage from "../AuthPage/AuthPage";
-import NewOrderPage from "../NewOrderPage/NewOrderPage";
-import OrderHistoryPage from "../OrderHistoryPage/OrderHistoryPage";
+// import NewOrderPage from "../NewOrderPage/NewOrderPage";
+// import OrderHistoryPage from "../OrderHistoryPage/OrderHistoryPage";
+import Home from "../../components/Home/Home";
+import Register from "../../components/Register/Register";
+import Login from "../../components/Login/Login";
 
 const log = debug("mern:pages:App:App");
 
@@ -24,16 +27,20 @@ function App() {
   return (
     <>
       <main className="App">
-        <NavBar setUser={setUser} />
+        <NavBar/>
+        {/* <NavBar setUser={setUser} /> */}
 
         <Routes>
-          <Route path="/orders" element={<OrderHistoryPage />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/Login" element={<Login />} />
+          {/* <Route path="/orders" element={<OrderHistoryPage />} />
           <Route path="/orders/new" element={<NewOrderPage />} />
 
           <Route path="/orders2" element={<OrderHistoryPage />}>
             <Route path="new" element={<NewOrderPage />} />
             <Route path="simon" element={<p>Simon</p>} />
-          </Route>
+          </Route> */}
         </Routes>
       </main>
     </>
