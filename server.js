@@ -28,6 +28,16 @@ app.get("/*", function (req, res) {
   res.sendFile(path.join(__dirname, "dist", "index.html"));
 });
 
+//m 2. import route using router
+var propertiesRouter = require("./routes/api/propertiesRouter");
+
+//m 1. create path to reach route
+app.use("/api/properties", propertiesRouter);
+
+// m
+app.use(express.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, "public")));
+
 const port = process.env.PORT || 3000;
 
 app.listen(port, function () {
