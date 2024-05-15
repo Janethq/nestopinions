@@ -1,4 +1,10 @@
+import { useState } from "react";
+
 function ReviewForm() {
+  const [newReview, setNewReview] = useState({});
+
+  
+
   return (
     <>
       <div>
@@ -23,37 +29,37 @@ function ReviewForm() {
               <option value="4">4</option>
               <option value="5">5</option>
             </select>
-            </div>
-            <div>
+          </div>
+          <div>
             <label htmlFor="looks-new">Looks New?: </label>
             <select name="looks-new" id="looks-new">
               <option value="yes">Yes</option>
               <option value="no">No</option>
             </select>
-            </div>
-            <div>
+          </div>
+          <div>
             <label htmlFor="pros">Pros: </label>
-              <textarea
-                name="pros"
-                id="pros"
-                placeholder="What do you like about this property?"
-              ></textarea>
-            </div>
-            <div>
-              <label htmlFor="cons">Cons: </label>
-              <textarea
-                name="cons"
-                id="cons"
-                placeholder="What can be improved?"
-              ></textarea>
-            </div>
-            <button type="submit" value="submit">
-              Submit
-            </button>
+            <textarea
+              name="pros"
+              id="pros"
+              placeholder="What do you like about this property?"
+            ></textarea>
+          </div>
+          <div>
+            <label htmlFor="cons">Cons: </label>
+            <textarea
+              name="cons"
+              id="cons"
+              placeholder="What can be improved?"
+            ></textarea>
+          </div>
+          <button type="submit" value="submit">
+            Submit
+          </button>
         </form>
       </div>
     </>
   );
 }
 
-export default ReviewForm
+export default ReviewForm;
