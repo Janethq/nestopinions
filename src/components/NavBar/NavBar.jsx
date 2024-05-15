@@ -1,21 +1,13 @@
-import { Link, NavLink } from "react-router-dom";
-import { logOut } from "../../utilities/users-service";
+import { NavLink } from "react-router-dom";
 
-export default function NavBar({ setUser }) {
-  const handleLogOut = () => {
-    logOut();
-    setUser(null);
-  };
-
+export default function NavBar() {
   return (
     <nav>
-      <NavLink to="/orders">Order History</NavLink>
+      <NavLink to="/">Home</NavLink>
       &nbsp; | &nbsp;
-      <NavLink to="/orders/new">New Order</NavLink>
+      <NavLink to="/register">Register</NavLink>
       &nbsp;&nbsp;
-      <Link to="" onClick={handleLogOut}>
-        Log Out
-      </Link>
+      <NavLink to="/login">Login</NavLink>
     </nav>
   );
 }
