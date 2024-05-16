@@ -7,16 +7,27 @@ const propertySchema = new Schema(
     address: {
       type: String,
       required: true,
+      trim: true,
     },
     postalCode: {
       type: Number,
       required: true,
     },
-    // Uncomment and adjust fields as needed
-    // area: String,
-    // distanceMrt: String,
-    // hdbType: String,
-    // reviews: [reviewSchema],
+    area: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    distanceMrt: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    hdbType: {
+      type: String,
+      required: true,
+      trim: true,
+    },
   },
   {
     timestamps: true,

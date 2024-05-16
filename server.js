@@ -34,9 +34,9 @@ var propertiesRouter = require("./routes/api/propertiesRouter");
 //m 1. create path to reach route
 app.use("/api/properties", propertiesRouter);
 
-// m
-app.use(express.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, "public")));
+// m parsing yrl encoded form data & serve static files if requested by user
+// app.use(express.urlencoded({ extended: false }));
+// app.use(express.static(path.join(__dirname, "public")));
 
 const port = process.env.PORT || 3000;
 
