@@ -12,11 +12,6 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(cors())
 
-// Configure both serve-favicon & static middleware
-// to serve from the production 'build' folder
-// app.use(express.static(path.join(__dirname, "dist")));
-// app.use(require("./config/checkToken").checkTokenMiddleware);
-
 // Put API routes here, before the "catch all" route
 app.get("/api", (req, res) => {
   res.json({ hello: "world" });
@@ -24,10 +19,19 @@ app.get("/api", (req, res) => {
 // app.use("/api/users", require("./routes/api/usersRoutes"));
 app.use("/reviews", require("./routes/reviewRoutes"));
 
+//m create and import
+const propertiesRouter = require("./routes/api/propertiesRouter");
+app.use("/api/properties", propertiesRouter);
+
+// m parsing url encoded form data & serve static files if requested by user
+// app.use(express.urlencoded({ extended: false }));
+// app.use(express.static(path.join(__dirname, "public")));
+
 // The following "catch all" route (note the *) is necessary
 // to return the index.html on all non-AJAX requests
+//m what they cannot catch, they throw here.
 app.get("/*", function (req, res) {
-  res.sendFile(path.join(__dirname, "dist", "index.html"));
+  res.json({ error: "no page found" });
 });
 
 const port = process.env.PORT || 3000;
