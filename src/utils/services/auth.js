@@ -11,3 +11,11 @@ export const register = async (userData) => {
   log("Response from server: %o", response);
   return response;
 };
+
+export const login = async (email, password) => {
+  log("loggingIn: %o", email, password);
+  const user = { email, password };
+
+  const token = await usersAPI.login(user);
+  log("token: %o", token);
+};

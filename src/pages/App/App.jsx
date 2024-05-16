@@ -25,7 +25,7 @@ function App() {
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/register" element={<Register setUser={setUser} />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/login" element={<Login setUser={setUser} />} />
           {/* <Route path="/property/:id" element={<PropertyPage />} /> */}
         </Routes>
       </main>
