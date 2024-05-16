@@ -1,19 +1,32 @@
 import { useState } from "react";
 import "tailwindcss/tailwind.css";
 import debug from "debug";
+import { register } from "../../utils/services/auth";
 
 const log = debug("mern:AuthPages:Register");
 
-export default function Register() {
+export default function Register({ setUser }) {
   const [userInfo, setUserInfo] = useState({
     username: "",
     email: "",
     password: "",
   });
 
-  const registerUser = (e) => {
+  const registerUser = async (e) => {
     e.preventDefault();
     log("registerUser: %o", userInfo);
+    const formData = { ...userInfo }; //create shallow copy
+    log("formData: %o", formData);
+    delete formData.error; // remove unnecassary info //--> db
+
+    try {
+      const user = await register(formData);
+      log("user: %o", user);
+
+      setUser(user); //update state with new user
+    } catch (error) {
+      setUserInfo({ ...userInfo, error: "Sign Up Failed" });
+    }
   };
 
   const handleChange = (e) => {

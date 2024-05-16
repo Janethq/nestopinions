@@ -22,7 +22,7 @@ app.use(express.static(path.join(__dirname, "/public")));
 // Put API routes here, before the "catch all" route
 // app.get("/api", (req, res) => {res.json({ hello: "world" });}); //for testing
 app.use("/", require("./routes/api/root"));
-app.use("/users", require("./routes/api/authRoutes"));
+app.use("/api/users", require("./routes/api/authRoutes")); // proxy /api ===:3000
 
 // The following "catch all" route (note the *) is necessary
 // to return the index.html on all non-AJAX requests //generic
