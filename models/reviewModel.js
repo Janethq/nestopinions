@@ -14,7 +14,7 @@ const reviewSchema = mongoose.Schema(
       max: 5,
     },
     looksNew: {
-      type: Number,
+      type: String,
       required: true,
       enum: ["Yes", "No"],
     },

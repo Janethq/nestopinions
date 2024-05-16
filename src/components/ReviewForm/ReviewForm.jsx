@@ -1,24 +1,31 @@
-import { useState } from "react";
 
 function ReviewForm() {
-  const [formData, setFormData] = useState({
-    time: "",
-    rating: 0,
-    looksNew: "",
-    pros: "",
-    cons: "",
-  });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    // process formData
+    const formObj = {
+      time: e.target.time.value,
+      rating: Number(e.target.rating.value),
+      looksNew: e.target.looksNew.value,
+      pros: e.target.pros.value,
+      cons: e.target.cons.value,
+    };
+    console.log(formObj)
     // Send a POST request to the new route with the form data
-    fetch("localhost:3000/reviews", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    });
+    try{
+      const res = await fetch("http://localhost:3000/reviews/create", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formObj),
+      });
+      console.log(res)
+    } catch(error){
+      console.log(error)
+    }
+    
   };
 
   return (
@@ -30,10 +37,10 @@ function ReviewForm() {
             <label htmlFor="time-of-visit">Time Of Visit: </label>
 
             <select name="time" id="time-of-visit">
-              <option value="morning">Morning</option>
-              <option value="afternoon">Afternoon</option>
-              <option value="evening">Evening</option>
-              <option value="night">Night</option>
+              <option value="Morning">Morning</option>
+              <option value="Afternoon">Afternoon</option>
+              <option value="Evening">Evening</option>
+              <option value="Night">Night</option>
             </select>
           </div>
           <div>
@@ -48,9 +55,9 @@ function ReviewForm() {
           </div>
           <div>
             <label htmlFor="looks-new">Looks New?: </label>
-            <select name="looks-new" id="looks-new">
-              <option value="yes">Yes</option>
-              <option value="no">No</option>
+            <select name="looksNew" id="looks-new">
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
             </select>
           </div>
           <div>

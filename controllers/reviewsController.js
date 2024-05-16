@@ -1,4 +1,4 @@
-const Review = require("../../models/reviewModel");
+const Review = require("../models/reviewModel");
 
 const create = async (req, res) => {
   try {
@@ -10,6 +10,11 @@ const create = async (req, res) => {
   }
 };
 
+const test = async (req, res) => {
+  res.json({ route: "reviews-test" });
+};
+
 module.exports = {
   create,
+  test
 };

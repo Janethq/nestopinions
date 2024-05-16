@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
 
 export default function ReviewDetails() {
-  const [reviewData, setReviewData] = useState({})
+  const [reviewData, setReviewData] = useState([])
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:3000/reviews");
+        const response = await fetch("http://localhost:3000/reviews/test");
         const data = await response.json();
+        console.log(data)
         setReviewData(data);
       } catch (error) {
         console.log(error.message);
@@ -18,29 +19,34 @@ export default function ReviewDetails() {
 
   return (
     <>
-      {reviewData && (
+      {reviewData.length>0 && (
         <div>
           <h1>Review Details</h1>
-          <div>
-            <label>Time Of Visit: </label>
-            <span>{reviewData.time}</span>
-          </div>
-          <div>
-            <label>Rating: </label>
-            <span>{reviewData.rating}</span>
-          </div>
-          <div>
-            <label>Looks New?: </label>
-            <span>{reviewData.looksNew}</span>
-          </div>
-          <div>
-            <label>Pros: </label>
-            <span>{reviewData.pros}</span>
-          </div>
-          <div>
-            <label>Cons: </label>
-            <span>{reviewData.cons}</span>
-          </div>
+          {reviewData.map((review, index) => (
+            // set unique key to remove error
+            <div key={index}>
+              <div>
+                <label>Time Of Visit: </label>
+                <span>{review.time}</span>
+              </div>
+              <div>
+                <label>Rating: </label>
+                <span>{review.rating}</span>
+              </div>
+              <div>
+                <label>Looks New?: </label>
+                <span>{review.looksNew}</span>
+              </div>
+              <div>
+                <label>Pros: </label>
+                <span>{review.pros}</span>
+              </div>
+              <div>
+                <label>Cons: </label>
+                <span>{review.cons}</span>
+              </div>
+            </div>
+          ))}
         </div>
       )}
     </>

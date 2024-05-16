@@ -5,23 +5,24 @@ const debug = require("debug")("mern:server");
 // Always require and configure near the top
 require("dotenv").config();
 require("./config/database");
-
+const cors = require("cors")
 const app = express();
 
 app.use(logger("dev"));
 app.use(express.json());
+app.use(cors())
 
 // Configure both serve-favicon & static middleware
 // to serve from the production 'build' folder
-app.use(express.static(path.join(__dirname, "dist")));
-app.use(require("./config/checkToken").checkTokenMiddleware);
+// app.use(express.static(path.join(__dirname, "dist")));
+// app.use(require("./config/checkToken").checkTokenMiddleware);
 
 // Put API routes here, before the "catch all" route
 app.get("/api", (req, res) => {
   res.json({ hello: "world" });
 });
-app.use("/api/users", require("./routes/api/usersRoutes"));
-app.use("/api/reviews", require("./routes/reviewRoutes"));
+// app.use("/api/users", require("./routes/api/usersRoutes"));
+app.use("/reviews", require("./routes/reviewRoutes"));
 
 // The following "catch all" route (note the *) is necessary
 // to return the index.html on all non-AJAX requests
