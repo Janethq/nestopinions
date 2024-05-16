@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const SearchBar = () => {
   const [query, setQuery] = useState("");
@@ -46,6 +47,7 @@ const SearchBar = () => {
             <p>Area: {property.area}</p>
             <p>Postal Code: {property.postalCode}</p>
             <p>HDB Type: {property.hdbType}</p>
+            <Link to={`/property/${property._id}`}>View Details</Link>
           </div>
         ))}
       </div>
