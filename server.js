@@ -21,28 +21,19 @@ app.get("/api", (req, res) => {
 });
 app.use("/api/users", require("./routes/api/usersRoutes"));
 
-// The following "catch all" route (note the *) is necessary
-// to return the index.html on all non-AJAX requests
-// app.get("/*", function (req, res) {
-//   res.sendFile(path.join(__dirname, "dist", "index.html"));
-// });
-
-//m 2. import route using router
-var propertiesRouter = require("./routes/api/propertiesRouter");
-
-//m 1. create path to reach route
+//m create and import
+const propertiesRouter = require("./routes/api/propertiesRouter");
 app.use("/api/properties", propertiesRouter);
 
-// m parsing yrl encoded form data & serve static files if requested by user
+// m parsing url encoded form data & serve static files if requested by user
 // app.use(express.urlencoded({ extended: false }));
 // app.use(express.static(path.join(__dirname, "public")));
 
 // The following "catch all" route (note the *) is necessary
 // to return the index.html on all non-AJAX requests
-//what they cannot catch, they throw here.
+//m what they cannot catch, they throw here.
 app.get("/*", function (req, res) {
   res.json({ error: "no page found" });
-  // res.sendFile(path.join(__dirname, "dist", "index.html"));
 });
 
 const port = process.env.PORT || 3000;

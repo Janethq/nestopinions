@@ -1,0 +1,23 @@
+meta {
+  name: createProperty
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:3000/api/properties
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+      "address": "Tamp",
+      "postalCode": 512345,
+      "area": "Tampines",
+    "distanceMrt": "300m",
+    "hdbType": "3-room"
+    
+    
+    }
+}
