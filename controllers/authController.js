@@ -10,6 +10,15 @@ const registerUser = async (req, res) => {
   const { username, email, password } = req.body;
 
   try {
+    //error msg for bad request (400)
+    const emailRegistered = await User.findOne({ email });
+
+    if (password.length < 3 || emailRegistered) {
+      return res.status(400).json({
+        error: `Registration unsuccessful! You may already have an account registered.`,
+      });
+    }
+
     //using modelcreate method of mongoose api
     const user = await User.create({
       username,

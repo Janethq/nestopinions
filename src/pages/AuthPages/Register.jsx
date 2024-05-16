@@ -111,6 +111,7 @@ export default function Register({ setUser }) {
                   id="password"
                   name="password"
                   type="password"
+                  minLength={3}
                   autoComplete="current-password"
                   required
                   value={userInfo.password}
