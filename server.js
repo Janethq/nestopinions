@@ -29,8 +29,6 @@ app.use("/api/properties", propertiesRouter);
 // app.use(express.urlencoded({ extended: false }));
 // app.use(express.static(path.join(__dirname, "public")));
 
-// The following "catch all" route (note the *) is necessary
-// to return the index.html on all non-AJAX requests
 //m what they cannot catch, they throw here.
 app.get("/*", function (req, res) {
   res.json({ error: "no page found" });
