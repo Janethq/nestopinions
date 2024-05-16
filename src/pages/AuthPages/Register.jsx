@@ -2,6 +2,8 @@ import { useState } from "react";
 import "tailwindcss/tailwind.css";
 import debug from "debug";
 import { register } from "../../utils/services/auth";
+import { toast } from "react-hot-toast";
+import { Link } from "react-router-dom";
 
 const log = debug("mern:AuthPages:Register");
 
@@ -23,9 +25,18 @@ export default function Register({ setUser }) {
       const user = await register(formData);
       log("user: %o", user);
 
-      setUser(user); //update state with new user
+      if (user.error) {
+        toast.error(user.error);
+      } else {
+        setUser(user); //update state with new user
+        toast.success("Registration successful!");
+        //navigate to ? either page user was on/ dashboard/ login?
+      }
     } catch (error) {
-      setUserInfo({ ...userInfo, error: "Sign Up Failed" });
+      setUserInfo({ ...userInfo, error: "Registration Failed" });
+      toast.error(
+        "Registration unsuccessful! You may already have an account registered."
+      );
     }
   };
 
@@ -133,12 +144,12 @@ export default function Register({ setUser }) {
 
           <p className="mt-10 text-center text-sm text-gray-500">
             Already have an account?{" "}
-            <a
-              href="#"
+            <Link
+              to="/login"
               className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
             >
               Login
-            </a>
+            </Link>
           </p>
         </div>
       </div>
