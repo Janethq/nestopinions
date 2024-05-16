@@ -6,12 +6,12 @@ const cors = require("cors"); //for security
 const corsOptions = require("./config/corsOptions");
 // Always require and configure near the top
 require("dotenv").config();
-require("./config/database");
+require("./config/database"); //connect to database
 
 const app = express();
 
 app.use(logger("dev"));
-app.use(express.json());
+app.use(express.json()); //middleware (json data --> req.body)
 app.use(cors(corsOptions));
 
 // Configure static middleware
