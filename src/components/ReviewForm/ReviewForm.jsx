@@ -1,15 +1,31 @@
-
+import { useState } from "react";
 
 function ReviewForm() {
+  const [formData, setFormData] = useState({
+    time: "",
+    rating: 0,
+    looksNew: "",
+    pros: "",
+    cons: "",
+  });
 
-
-  
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Send a POST request to the new route with the form data
+    fetch("localhost:3000/reviews", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
+  };
 
   return (
     <>
       <div>
         <h1>Review Form</h1>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div>
             <label htmlFor="time-of-visit">Time Of Visit: </label>
 
