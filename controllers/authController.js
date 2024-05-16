@@ -34,7 +34,12 @@ const registerUser = async (req, res) => {
   }
 };
 
+const loginUser = (req, res) => {
+  res.json({ msg: "login endpoint" }); //test bruno
+};
+
 module.exports = {
   test,
   registerUser,
+  loginUser,
 };
