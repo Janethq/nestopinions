@@ -13,15 +13,39 @@ const index = async (req, res) => {
   res.json(properties);
 };
 
-
 // SEARCH BY AREA
+// const search = async (req, res) => {
+//   const { area } = req.query;
+//   try {
+//     if (!area) {
+//       return res.status(400).json({ error: "Area of Property Estate" });
+//     }
+//     const properties = await Property.find({ area });
+//     res.json(properties);
+//   } catch (error) {
+//     res.status(500).json({ error: error.message });
+//   }
+// };
+
+//SEARCH MULTIPLE BY AREA, POSTALCODE, HDBTYPE
 const search = async (req, res) => {
-  const { area } = req.query;
+  const { area, postalCode, hdbType } = req.query;
   try {
-    if (!area) {
-      return res.status(400).json({ error: "Area of Property Estate" });
+    let query = {};
+
+    if (area) {
+      query.area = area;
     }
-    const properties = await Property.find({ area });
+
+    if (postalCode) {
+      query.postalCode = postalCode;
+    }
+
+    if (hdbType) {
+      query.hdbType = hdbType;
+    }
+
+    const properties = await Property.find(query);
     res.json(properties);
   } catch (error) {
     res.status(500).json({ error: error.message });
