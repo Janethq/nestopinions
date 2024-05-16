@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 
 export default function ReviewDetails() {
-  const [reviewData, setReviewData] = useState([])
+  const [reviewData, setReviewData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch("http://localhost:3000/reviews/test");
         const data = await response.json();
-        console.log(data)
+        console.log(data);
         setReviewData(data);
       } catch (error) {
         console.log(error.message);
@@ -19,7 +19,7 @@ export default function ReviewDetails() {
 
   return (
     <>
-      {reviewData.length>0 && (
+      {reviewData.length > 0 && (
         <div>
           <h1>Review Details</h1>
           {reviewData.map((review, index) => (
@@ -44,6 +44,9 @@ export default function ReviewDetails() {
               <div>
                 <label>Cons: </label>
                 <span>{review.cons}</span>
+              </div>
+              <div>
+                <button>Remove Review</button>
               </div>
             </div>
           ))}
