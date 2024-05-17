@@ -4,6 +4,8 @@ const logger = require("morgan");
 const debug = require("debug")("mern:server");
 const cors = require("cors"); //for security
 const corsOptions = require("./config/corsOptions");
+const cookieParser = require("cookie-parser");
+const { verifyJWT } = require("./src/utils/services/token");
 // Always require and configure near the top
 require("dotenv").config();
 require("./config/database"); //connect to database
@@ -13,6 +15,8 @@ const app = express();
 app.use(logger("dev"));
 app.use(express.json()); //middleware (json data --> req.body)
 app.use(cors(corsOptions));
+app.use(cookieParser()); //middleware (jwt --> cookie)
+app.use(verifyJWT);
 
 // Configure static middleware
 // to serve from the production 'build' folder

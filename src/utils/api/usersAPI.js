@@ -8,3 +8,7 @@ export const register = (userData) =>
 export const login = (credentials) => {
   return sendHTTPRequest(`${BASE_URL}/login`, "POST", credentials);
 };
+
+export function checkToken() {
+  return sendHTTPRequest(`${BASE_URL}/check-token`);
+}
