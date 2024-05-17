@@ -6,7 +6,7 @@ export default function ReviewDetails() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:3000/reviews/test");
+        const response = await fetch(`/api/addreview`);
         const data = await response.json();
         console.log(data);
         setReviewData(data);
@@ -47,6 +47,9 @@ export default function ReviewDetails() {
               </div>
               <div>
                 <button>Remove Review</button>
+              </div>
+              <div>
+                <button>Edit Review</button>
               </div>
             </div>
           ))}
