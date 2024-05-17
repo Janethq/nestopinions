@@ -7,7 +7,7 @@ router.get("/", (req, res) => {
 });
 
 router.get("/test", reviewsCtrl.test);
-
+router.get("/", reviewsCtrl.index);
 router.post("/create", reviewsCtrl.create);
 router.delete("/:id", reviewsCtrl.remove);
 router.put("/:id", reviewsCtrl.update);

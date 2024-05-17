@@ -10,6 +10,11 @@ const create = async (req, res) => {
   }
 };
 
+const index = async (req, res) => {
+  const reviews = await Review.find({});
+  res.json(reviews);
+};
+
 const update = async (req, res) => {
   try {
     const { id } = req.params;
@@ -48,6 +53,7 @@ const test = async (req, res) => {
 
 module.exports = {
   create,
+  index,
   test,
   update,
   remove,
