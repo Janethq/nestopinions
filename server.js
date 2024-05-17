@@ -1,16 +1,14 @@
 const express = require("express");
-const path = require("path");
+// const path = require("path");
 const logger = require("morgan");
 const debug = require("debug")("mern:server");
 // Always require and configure near the top
 require("dotenv").config();
 require("./config/database");
-const cors = require("cors")
 const app = express();
 
 app.use(logger("dev"));
 app.use(express.json());
-app.use(cors())
 
 // Put API routes here, before the "catch all" route
 app.get("/api", (req, res) => {
@@ -19,13 +17,8 @@ app.get("/api", (req, res) => {
 // app.use("/api/users", require("./routes/api/usersRoutes"));
 app.use("/reviews", require("./routes/reviewRoutes"));
 
-//m create and import
 const propertiesRouter = require("./routes/api/propertiesRouter");
 app.use("/api/properties", propertiesRouter);
-
-// m parsing url encoded form data & serve static files if requested by user
-// app.use(express.urlencoded({ extended: false }));
-// app.use(express.static(path.join(__dirname, "public")));
 
 //m what they cannot catch, they throw here.
 app.get("/*", function (req, res) {

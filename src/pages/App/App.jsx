@@ -23,7 +23,7 @@ function App() {
           <Route path="/property/:id" element={<PropertyDetails />} />
           <Route path="/addreview" element={<ReviewForm />} />
           <Route path="/seereview" element={<ReviewDetails />} />
-          {/* <Route path="/property/:id" element={<PropertyPage />} /> */}
+         
         </Routes>
       </main>
     </>
