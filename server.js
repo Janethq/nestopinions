@@ -1,5 +1,5 @@
 const express = require("express");
-
+const path = require("path")
 const logger = require("morgan");
 const debug = require("debug")("mern:server");
 const cors = require("cors"); //for security
@@ -30,7 +30,7 @@ app.use("/api/properties", propertiesRouter);
 
 //m what they cannot catch, they throw here.
 app.get("/*", function (req, res) {
-  res.json({ error: "no page found" });
+  res.json({ error: "no page found" })});
   
   app.get("/*", function (req, res) {
   res.sendFile(path.join(__dirname, "public", "index.html"));
