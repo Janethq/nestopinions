@@ -14,7 +14,7 @@ app.get("/api", (req, res) => {
   res.json({ hello: "world" });
 });
 // app.use("/api/users", require("./routes/api/usersRoutes"));
-app.use("/reviews", require("./routes/reviewRoutes"));
+app.use("/api/reviews", require("./routes/reviewRoutes"));
 
 //m create and import
 const propertiesRouter = require("./routes/api/propertiesRouter");
