@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 const SearchBar = () => {
   const [query, setQuery] = useState("");
   const [searchCriteria, setSearchCriteria] = useState("area"); // Default search criteria
-
   const [searchResults, setSearchResults] = useState([]);
 
   const handleSearch = async () => {
@@ -24,30 +23,68 @@ const SearchBar = () => {
   };
 
   return (
-    <div>
-      <select
-        value={searchCriteria}
-        onChange={(e) => setSearchCriteria(e.target.value)}
-      >
-        <option value="area">Estate Area</option>
-        <option value="postalCode">Postal Code</option>
-        <option value="hdbType">HDB Type</option>
-      </select>
-      <input
-        type="text"
-        placeholder={`Search by ${searchCriteria}`}
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-      />
-      <button onClick={handleSearch}>Search</button>
+    <div className="max-w-lg mx-auto mt-10 p-4 bg-white shadow-lg rounded-lg">
+      <div className="mb-4">
+        <label
+          htmlFor="searchCriteria"
+          className="block text-gray-700 font-bold mb-2"
+        >
+          Search Criteria
+        </label>
+        <select
+          id="searchCriteria"
+          value={searchCriteria}
+          onChange={(e) => setSearchCriteria(e.target.value)}
+          className="block w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+          <option value="area">Estate Area</option>
+          <option value="postalCode">Postal Code</option>
+          <option value="hdbType">HDB Type</option>
+        </select>
+      </div>
 
-      <div>
+      <div className="mb-4">
+        <label htmlFor="query" className="block text-gray-700 font-bold mb-2">
+          Search Query
+        </label>
+        <input
+          id="query"
+          type="text"
+          placeholder={`Search by ${searchCriteria}`}
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          className="block w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
+
+      <button
+        onClick={handleSearch}
+        className="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      >
+        Search
+      </button>
+
+      <div className="mt-6">
         {searchResults.map((property) => (
-          <div key={property._id}>
-            <p>Area: {property.area}</p>
-            <p>Postal Code: {property.postalCode}</p>
-            <p>HDB Type: {property.hdbType}</p>
-            <Link to={`/property/${property._id}`}>View Details</Link>
+          <div
+            key={property._id}
+            className="p-4 border border-gray-200 rounded-lg mb-4"
+          >
+            <p className="text-gray-700">
+              <strong>Area:</strong> {property.area}
+            </p>
+            <p className="text-gray-700">
+              <strong>Postal Code:</strong> {property.postalCode}
+            </p>
+            <p className="text-gray-700">
+              <strong>HDB Type:</strong> {property.hdbType}
+            </p>
+            <Link
+              to={`/property/${property._id}`}
+              className="text-blue-500 hover:underline"
+            >
+              View Details
+            </Link>
           </div>
         ))}
       </div>

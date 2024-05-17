@@ -5,8 +5,9 @@ import { LandingPage } from "../LandingPage";
 import Register from "../AuthPages/Register";
 import Login from "../AuthPages/Login";
 import ReviewForm from "../../components/ReviewForm/ReviewForm";
-import { PropertyDetails } from "../PropertyDetails";
+import PropertyDetails from "../PropertyDetails";
 import ReviewDetails from "../../components/ReviewDetails/ReviewDetails";
+import PropertyFormPage from "../PropertyFormPage";
 
 // const log = debug("mern:pages:App:App");
 
@@ -23,7 +24,7 @@ function App() {
           <Route path="/property/:id" element={<PropertyDetails />} />
           <Route path="/addreview" element={<ReviewForm />} />
           <Route path="/seereview" element={<ReviewDetails />} />
-         
+          <Route path="/addproperty" element={<PropertyFormPage />} />
         </Routes>
       </main>
     </>

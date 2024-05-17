@@ -1,0 +1,21 @@
+meta {
+  name: createPropertywithIMG
+  type: http
+  seq: 11
+}
+
+post {
+  url: http://localhost:3000/api/properties
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "address": "232 Tampines West St 71",
+    "postalCode": 512232,
+    "area": "Tampines",
+    "distanceMrt": "700m",
+    "hdbType": "5-room"
+  }
+}

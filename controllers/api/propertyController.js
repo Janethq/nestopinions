@@ -13,20 +13,6 @@ const index = async (req, res) => {
   res.json(properties);
 };
 
-// SEARCH BY AREA
-// const search = async (req, res) => {
-//   const { area } = req.query;
-//   try {
-//     if (!area) {
-//       return res.status(400).json({ error: "Area of Property Estate" });
-//     }
-//     const properties = await Property.find({ area });
-//     res.json(properties);
-//   } catch (error) {
-//     res.status(500).json({ error: error.message });
-//   }
-// };
-
 //SEARCH MULTIPLE BY AREA, POSTALCODE, HDBTYPE
 const search = async (req, res) => {
   const { area, postalCode, hdbType } = req.query;
@@ -83,10 +69,25 @@ const update = async (req, res) => {
   }
 };
 
+//DISPLAY ONE BY ID FOR PROPERTY DETAILS
+const show = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const property = await Property.findById(id);
+    if (!property) {
+      return res.status(404).json({ error: "Property not found" });
+    }
+    res.json(property);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
 module.exports = {
   index,
   create,
   search,
   remove,
   update,
+  show,
 };
