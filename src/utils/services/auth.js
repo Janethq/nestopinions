@@ -28,3 +28,8 @@ export const login = async (email, password) => {
   setToken(token);
   return getUser();
 };
+
+export const checkToken = async () => {
+  const dateStr = await usersAPI.checkToken();
+  return new Date(dateStr);
+};
