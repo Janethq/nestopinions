@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-export const PropertyDetails = () => {
+export default function PropertyDetails() {
   const { id } = useParams();
   const [propertyDetails, setPropertyDetails] = useState(null);
 
@@ -13,9 +13,10 @@ export const PropertyDetails = () => {
           throw new Error("Failed to fetch property details");
         }
         const data = await response.json();
+        console.log("Fetched property details:", data); //checking
         setPropertyDetails(data);
       } catch (error) {
-        console.error("Error fetching property details:", error);
+        console.error("i cannot find this property:", error);
       }
     };
 
@@ -47,4 +48,4 @@ export const PropertyDetails = () => {
       <button onClick={handleShare}>Share</button>
     </div>
   );
-};
+}
