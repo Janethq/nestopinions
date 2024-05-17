@@ -9,6 +9,7 @@ const app = express();
 
 app.use(logger("dev"));
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Put API routes here, before the "catch all" route
 app.get("/api", (req, res) => {

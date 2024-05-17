@@ -44,6 +44,7 @@ export default function PropertyDetails() {
       <p>Area: hello{propertyDetails.area}</p>
       <p>Postal Code: {propertyDetails.postalCode}</p>
       <p>HDB Type: {propertyDetails.hdbType}</p>
+      {/* <img src={propertyDetails.imageUrl} alt="Property" /> */}
       <br />
       <button onClick={handleShare}>Share</button>
     </div>
