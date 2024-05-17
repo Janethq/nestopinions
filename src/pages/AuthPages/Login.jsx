@@ -3,10 +3,14 @@ import "tailwindcss/tailwind.css";
 import debug from "debug";
 import { login } from "../../utils/services/auth";
 import toast from "react-hot-toast";
+import { AuthContext } from "../../context/AuthContext.jsx";
+import { useContext } from "react";
 
 const log = debug("mern:AuthPages:Login");
 
-export default function Login({ setUser }) {
+export default function Login() {
+  const { setAuthUser, authUser } = useContext(AuthContext);
+
   const loginUser = async (e) => {
     e.preventDefault();
 
@@ -18,7 +22,9 @@ export default function Login({ setUser }) {
       const { email, password } = data;
       const user = await login(email, password);
 
-      setUser(user); //--> undefined
+      // setUser(user); //--> undefined
+      setAuthUser(user);
+      log("login: ", authUser);
       toast.success("Login successful!");
       //navigate to ?
     } catch (error) {
