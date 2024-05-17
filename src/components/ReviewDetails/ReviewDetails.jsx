@@ -48,6 +48,9 @@ export default function ReviewDetails() {
               <div>
                 <button>Remove Review</button>
               </div>
+              <div>
+                <button>Edit Review</button>
+              </div>
             </div>
           ))}
         </div>

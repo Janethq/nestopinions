@@ -1,16 +1,13 @@
 const express = require("express");
-const path = require("path");
 const logger = require("morgan");
 const debug = require("debug")("mern:server");
 // Always require and configure near the top
 require("dotenv").config();
 require("./config/database");
-const cors = require("cors")
 const app = express();
 
 app.use(logger("dev"));
 app.use(express.json());
-app.use(cors())
 
 // Put API routes here, before the "catch all" route
 app.get("/api", (req, res) => {

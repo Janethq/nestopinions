@@ -1,6 +1,5 @@
 
 function ReviewForm() {
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     // process formData
@@ -11,9 +10,9 @@ function ReviewForm() {
       pros: e.target.pros.value,
       cons: e.target.cons.value,
     };
-    console.log(formObj)
+    console.log(formObj);
     // Send a POST request to the new route with the form data
-    try{
+    try {
       const res = await fetch("http://localhost:3000/reviews/create", {
         method: "POST",
         headers: {
@@ -21,11 +20,10 @@ function ReviewForm() {
         },
         body: JSON.stringify(formObj),
       });
-      console.log(res)
-    } catch(error){
-      console.log(error)
+      console.log(res);
+    } catch (error) {
+      console.log(error);
     }
-    
   };
 
   return (
