@@ -1,3 +1,5 @@
+import { getToken } from "../services/clientToken";
+
 export default async function sendHTTPRequest(
   url,
   method = "GET",
@@ -9,11 +11,11 @@ export default async function sendHTTPRequest(
     options.body = JSON.stringify(payload);
   }
 
-  //   const token = getToken();
-  //   if (token) {
-  //     options.headers = options.headers || {};
-  //     options.headers.Authorization = `Bearer ${token}`;
-  //   }
+  const token = getToken();
+  if (token) {
+    options.headers = options.headers || {};
+    options.headers.Authorization = `Bearer ${token}`;
+  }
 
   const res = await fetch(url, options);
   if (res.ok) return res.json();

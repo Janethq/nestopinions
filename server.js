@@ -5,7 +5,7 @@ const debug = require("debug")("mern:server");
 const cors = require("cors"); //for security
 const corsOptions = require("./config/corsOptions");
 const cookieParser = require("cookie-parser");
-const { verifyJWT } = require("./src/utils/services/token");
+const { verifyJWT } = require("./config/verifyToken");
 // Always require and configure near the top
 require("dotenv").config();
 require("./config/database"); //connect to database

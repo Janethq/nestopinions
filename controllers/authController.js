@@ -11,7 +11,7 @@ const test = (req, res) => {
 
 //helper function
 const createJWT = (user) =>
-  jwt.sign({ user }, process.env.SECRET, { expiresIn: "20m" });
+  jwt.sign({ user }, process.env.SECRET, { expiresIn: "10s" });
 
 // register
 const registerUser = async (req, res) => {

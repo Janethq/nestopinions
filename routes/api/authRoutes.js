@@ -6,7 +6,7 @@ const {
   loginUser,
   checkToken,
 } = require("../../controllers/authController");
-const { verifyJWT } = require("../../src/utils/services/token");
+const { verifyJWT } = require("../../config/verifyToken");
 
 // /api/users
 router.get("/", test); //bruno --> testing

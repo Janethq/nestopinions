@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
-
+// -------------------SERVER-SIDE-----------------
+// helper functions
 const storeUser = (req, res, user) => {
   res.locals.user = user;
 };
