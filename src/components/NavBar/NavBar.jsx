@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import toast from "react-hot-toast";
+import { removeToken } from "../../utils/services/clientToken";
 
 export default function NavBar() {
   const { setAuthUser, authUser } = useContext(AuthContext);
@@ -9,8 +10,8 @@ export default function NavBar() {
 
   const handleLogout = () => {
     setAuthUser(null);
-    localStorage.removeItem("token");
-    document.cookie = "token=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    removeToken(); // localStorage.removeItem("token");
+    // document.cookie = "token=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT";
     toast.success("You have successfully logged out.");
     navigate("/"); //back to landing
   };
