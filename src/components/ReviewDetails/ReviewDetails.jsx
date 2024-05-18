@@ -3,24 +3,39 @@ import { useState, useEffect } from "react";
 export default function ReviewDetails() {
   const [reviewData, setReviewData] = useState([]);
 
+  const fetchData = async () => {
+    try {
+      const response = await fetch(`/api/reviews`);
+      const data = await response.json();
+      console.log(data);
+      setReviewData(data);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(`/api/reviews`);
-        const data = await response.json();
-        console.log(data);
-        setReviewData(data);
-      } catch (error) {
-        console.log(error.message);
-      }
-    };
     fetchData();
   }, []);
+
+  const handleRemove = async (id) => {
+    try {
+      await fetch(`/api/reviews/${id}`, {
+        method: "DELETE",
+      });
+      fetchData()
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
   const displayReviews = () => {
     if (reviewData.length > 0) {
       return reviewData.map((review, index) => (
         <div key={index}>
+          <div>
+            <label>User: </label>
+            <span>UserName Goes Here</span>
+          </div>
           <div>
             <label>Time Of Visit: </label>
             <span>{review.time}</span>
@@ -42,10 +57,9 @@ export default function ReviewDetails() {
             <span>{review.cons}</span>
           </div>
           <div>
-            <button>Remove Review</button>
-          </div>
-          <div>
-            <button>Edit Review</button>
+            <button onClick={() => handleRemove(review._id)}>
+              Remove Review
+            </button>
           </div>
         </div>
       ));
