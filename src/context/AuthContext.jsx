@@ -1,6 +1,8 @@
 import { createContext, useState, useEffect } from "react";
 import debug from "debug";
-import { checkToken } from "../utils/services/auth";
+import { jwtDecode } from "jwt-decode";
+import { getToken } from "../utils/services/clientToken";
+// import { checkToken } from "../utils/services/auth";
 
 const log = debug("mern:context:AuthContext");
 
@@ -13,17 +15,28 @@ export default function AuthProvider({ children }) {
 
   log("user %o", authUser);
 
+  // useEffect(() => {
+  //   const verifyUser = async () => {
+  //     try {
+  //       const user = await checkToken();
+  //       setAuthUser(user);
+  //     } catch (error) {
+  //       setAuthUser(null);
+  //     }
+  //   };
+  //   verifyUser();
+  // }, []);
+
   useEffect(() => {
-    const verifyUser = async () => {
-      try {
-        const user = await checkToken();
-        setAuthUser(user);
-      } catch (error) {
-        setAuthUser(null);
-      }
-    };
-    verifyUser();
-  }, [setAuthUser]);
+    const token = getToken();
+    if (token) {
+      // get user data based on token --> decode to get user info
+      const user = jwtDecode(token);
+      setAuthUser(user);
+    } else {
+      setAuthUser(null);
+    }
+  }, []);
 
   return (
     <AuthContext.Provider value={{ setAuthUser, authUser }}>
