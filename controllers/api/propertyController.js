@@ -59,7 +59,8 @@ const seedData = [
 
 //CREATE PROPERTY
 const create = async (req, res) => {
-  const body = req.body; //taking whatever it received, dig into data, grabbin the body
+const body = req.body;
+//taking whatever it received, dig into data, grabbin the body
   const property = await Property.create(body);
   res.status(201).json(property); //return what you created
 };
