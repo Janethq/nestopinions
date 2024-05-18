@@ -1,16 +1,19 @@
-// config/multer.js
 const multer = require("multer");
-const { CloudinaryStorage } = require("multer-storage-cloudinary");
-const cloudinary = require("./cloudinaryConfig");
+const { storage } = require("../config/cloudinary");
 
-const storage = new CloudinaryStorage({
-  cloudinary: cloudinary,
-  params: {
-    folder: "properties", // Optional folder name on Cloudinary
-    allowedFormats: ["jpeg", "png", "jpg"],
-  },
-});
+const fileFilter = (req, file, cb) => {
+  const allowedTypes = ["image/jpeg", "image/jpg", "image/png"];
+  if (allowedTypes.includes(file.mimetype)) {
+    cb(null, true);
+  } else {
+    console.log("Invalid file type:", file.mimetype);
+    cb(
+      new Error("Invalid file type. Only JPEG, PNG, and JPG are allowed."),
+      false
+    );
+  }
+};
 
-const parser = multer({ storage: storage });
+const upload = multer({ storage, fileFilter });
 
-module.exports = parser;
+module.exports = upload;

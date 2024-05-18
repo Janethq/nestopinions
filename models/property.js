@@ -29,10 +29,10 @@ const propertySchema = new Schema(
       trim: true,
       enum: ["3-room", "4-room", "5-room"],
     },
-    // imageUrl: {
-    //   type: String, // Field to store the Cloudinary image URL
-    //   required: true,
-    // },
+    imageUrl: {
+      type: String,
+      required: true,
+    },
   },
   {
     timestamps: true,

@@ -1,11 +1,83 @@
 const Property = require("../../models/property");
 
+const seedData = [
+  {
+    address: "525B Pasir Ris Street 51",
+    postalCode: 512525,
+    area: "Pasir Ris",
+    distanceMrt: "300m",
+    hdbType: "4-room",
+    imageUrl:
+      "https://ohmyhome.com/wp-content/uploads/2021/07/IMG_9026-2-1-e1633056815164.jpg",
+  },
+  {
+    address: "456 Serangoon Road",
+    postalCode: 218163,
+    area: "Serangoon",
+    distanceMrt: "400m",
+    hdbType: "4-room",
+    imageUrl:
+      "https://www.hdb.gov.sg/-/media/HDBContent/Images/CCG/our-towns-tampines-2.ashx",
+  },
+  {
+    address: "789 Bukit Timah Road",
+    postalCode: 269791,
+    area: "Bukit Timah",
+    distanceMrt: "300m",
+    hdbType: "5-room",
+    imageUrl:
+      "https://ohmyhome.com/wp-content/uploads/2021/07/IMG_9026-2-1-e1633056815164.jpg",
+  },
+  {
+    address: "101 Clementi Avenue 3",
+    postalCode: 129905,
+    area: "Clementi",
+    distanceMrt: "150m",
+    hdbType: "3-room",
+    imageUrl:
+      "https://ohmyhome.com/wp-content/uploads/2021/08/IMG_9074-2-scaled.jpg",
+  },
+  {
+    address: "202 Bedok North Street 1",
+    postalCode: 460202,
+    area: "Bedok",
+    distanceMrt: "600m",
+    hdbType: "4-room",
+    imageUrl:
+      "https://ohmyhome.com/wp-content/uploads/2021/08/IMG_9074-2-scaled.jpg",
+  },
+  {
+    address: "303 Jurong East Street 21",
+    postalCode: 600303,
+    area: "Jurong East",
+    distanceMrt: "500m",
+    hdbType: "5-room",
+    imageUrl:
+      "https://ohmyhome.com/wp-content/uploads/2021/08/IMG_9074-2-scaled.jpg",
+  },
+];
+
 //CREATE PROPERTY
 const create = async (req, res) => {
-  const body = req.body;
+  const body = req.body; //taking whatever it received, dig into data, grabbin the body
   const property = await Property.create(body);
   res.status(201).json(property); //return what you created
 };
+//SEED PROPERTIES
+
+const seed = async (req, res) => {
+  // Clear the existing data
+  await Property.deleteMany({});
+  console.log("Existing data cleared");
+  const property = await Property.insertMany(seedData);
+  console.log("Database okay!");
+  res.status(201).json(property); //return what you created
+};
+
+// const seed = async (req, res) => {
+//   console.log("It works");
+//   res.status(200).send("It works");
+// };
 
 //SEE ALL PROPERTIES
 const index = async (req, res) => {
@@ -90,4 +162,5 @@ module.exports = {
   remove,
   update,
   show,
+  seed,
 };
