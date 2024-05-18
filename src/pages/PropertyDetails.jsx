@@ -41,6 +41,7 @@ export default function PropertyDetails() {
   return (
     <div>
       <h2>Property Details</h2>
+      <p>Address: {propertyDetails.address}</p>
       <p>Area: {propertyDetails.area}</p>
       <p>Postal Code: {propertyDetails.postalCode}</p>
       <p>HDB Type: {propertyDetails.hdbType}</p>

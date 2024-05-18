@@ -17,7 +17,7 @@ const seedData = [
     distanceMrt: "400m",
     hdbType: "4-room",
     imageUrl:
-      "https://www.hdb.gov.sg/-/media/HDBContent/Images/CCG/our-towns-tampines-2.ashx",
+      "https://ohmyhome.com/wp-content/uploads/2021/08/IMG_8871-2-scaled.jpg",
   },
   {
     address: "789 Bukit Timah Road",
@@ -26,7 +26,7 @@ const seedData = [
     distanceMrt: "300m",
     hdbType: "5-room",
     imageUrl:
-      "https://ohmyhome.com/wp-content/uploads/2021/07/IMG_9026-2-1-e1633056815164.jpg",
+      "https://ohmyhome.com/wp-content/uploads/2021/08/IMG_8942-2-scaled.jpg",
   },
   {
     address: "101 Clementi Avenue 3",
@@ -44,7 +44,7 @@ const seedData = [
     distanceMrt: "600m",
     hdbType: "4-room",
     imageUrl:
-      "https://ohmyhome.com/wp-content/uploads/2021/08/IMG_9074-2-scaled.jpg",
+      "https://i0.wp.com/lifefinance.com.sg/wp-content/uploads/2022/11/P-Yishun-Boardwalk.jpg?w=1536&ssl=1",
   },
   {
     address: "303 Jurong East Street 21",
@@ -53,9 +53,11 @@ const seedData = [
     distanceMrt: "500m",
     hdbType: "5-room",
     imageUrl:
-      "https://ohmyhome.com/wp-content/uploads/2021/08/IMG_9074-2-scaled.jpg",
+      "https://i0.wp.com/lifefinance.com.sg/wp-content/uploads/2020/01/nguyen-thu-hoai-a15b7LYrfbk-unsplash-scaled.jpg?resize=768%2C472&ssl=1",
   },
 ];
+
+// https://i0.wp.com/www.alainguillot.com/wp-content/uploads/2021/05/second-HDB.jpg?w=479&ssl=1
 
 //CREATE PROPERTY
 const create = async (req, res) => {
@@ -71,7 +73,7 @@ const seed = async (req, res) => {
   console.log("Existing data cleared");
   const property = await Property.insertMany(seedData);
   console.log("Database okay!");
-  res.status(201).json(property); //return what you created
+  res.status(201).json(property);
 };
 
 // const seed = async (req, res) => {
@@ -155,6 +157,16 @@ const show = async (req, res) => {
   }
 };
 
+// FEATURED LISTINGS
+const featured = async (req, res) => {
+  try {
+    const featuredProperties = await Property.find({ hdbType: "4-room" });
+    res.json(featuredProperties);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
 module.exports = {
   index,
   create,
@@ -163,4 +175,5 @@ module.exports = {
   update,
   show,
   seed,
+  featured,
 };
