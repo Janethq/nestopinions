@@ -1,5 +1,6 @@
 var express = require("express");
 var router = express.Router();
+// const upload = require("../../middlewares/upload");
 
 const {
   index,
@@ -12,6 +13,7 @@ const {
 
 router.get("/", index);
 router.post("/", create);
+// router.post("/", upload.single("image"), create);
 router.get("/search", search);
 router.delete("/:id", remove);
 router.put("/:id", update);

@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const PropertyForm = ({ onSubmit }) => {
+const PropertyForm = () => {
   const [formData, setFormData] = useState({
     address: "",
     postalCode: "",
@@ -11,20 +11,36 @@ const PropertyForm = ({ onSubmit }) => {
   });
 
   const handleChange = (e) => {
-    const { name, value, files } = e.target;
-    setFormData({
-      ...formData,
-      [name]: files ? files[0] : value,
-    });
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleImageChange = (e) => {
+    setFormData({ ...formData, image: e.target.files[0] });
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const data = new FormData();
-    for (const key in formData) {
+    for (let key in formData) {
       data.append(key, formData[key]);
     }
-    onSubmit(data);
+
+    try {
+      const response = await fetch("/api/properties", {
+        method: "POST",
+        body: data,
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const result = await response.json();
+      console.log(result);
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   return (
@@ -32,34 +48,47 @@ const PropertyForm = ({ onSubmit }) => {
       <input
         type="text"
         name="address"
-        placeholder="Address"
+        value={formData.address}
         onChange={handleChange}
+        placeholder="Address"
+        required
       />
       <input
         type="number"
         name="postalCode"
-        placeholder="Postal Code"
+        value={formData.postalCode}
         onChange={handleChange}
+        placeholder="Postal Code"
+        required
       />
       <input
         type="text"
         name="area"
-        placeholder="Area"
+        value={formData.area}
         onChange={handleChange}
+        placeholder="Area"
+        required
       />
       <input
         type="text"
         name="distanceMrt"
+        value={formData.distanceMrt}
+        onChange={handleChange}
         placeholder="Distance to MRT"
-        onChange={handleChange}
+        required
       />
-      <input
-        type="text"
+      <select
         name="hdbType"
-        placeholder="HDB Type"
+        value={formData.hdbType}
         onChange={handleChange}
-      />
-      <input type="file" name="image" onChange={handleChange} />
+        required
+      >
+        <option value="">Select HDB Type</option>
+        <option value="3-room">3-room</option>
+        <option value="4-room">4-room</option>
+        <option value="5-room">5-room</option>
+      </select>
+      <input type="file" name="image" onChange={handleImageChange} required />
       <button type="submit">Submit</button>
     </form>
   );

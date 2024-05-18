@@ -37,14 +37,18 @@ export default function PropertyDetails() {
   if (!propertyDetails) {
     return <div>Loading...</div>;
   }
-
+  console.log(propertyDetails.imageUrl);
   return (
     <div>
       <h2>Property Details</h2>
-      <p>Area: hello{propertyDetails.area}</p>
+      <p>Area: {propertyDetails.area}</p>
       <p>Postal Code: {propertyDetails.postalCode}</p>
       <p>HDB Type: {propertyDetails.hdbType}</p>
-      {/* <img src={propertyDetails.imageUrl} alt="Property" /> */}
+      {propertyDetails.imageUrl ? (
+        <img src={propertyDetails.imageUrl} alt="Property" />
+      ) : (
+        <p>No image available</p>
+      )}
       <br />
       <button onClick={handleShare}>Share</button>
     </div>

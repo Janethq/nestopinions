@@ -23,6 +23,8 @@ const seedData = [
     area: "Pasir Ris",
     distanceMrt: "300m",
     hdbType: "4-room",
+    imageUrl:
+      "https://ohmyhome.com/wp-content/uploads/2021/07/IMG_9026-2-1-e1633056815164.jpg",
   },
   {
     address: "456 Serangoon Road",
@@ -30,6 +32,8 @@ const seedData = [
     area: "Serangoon",
     distanceMrt: "400m",
     hdbType: "4-room",
+    imageUrl:
+      "https://www.hdb.gov.sg/-/media/HDBContent/Images/CCG/our-towns-tampines-2.ashx",
   },
   {
     address: "789 Bukit Timah Road",
@@ -37,6 +41,8 @@ const seedData = [
     area: "Bukit Timah",
     distanceMrt: "300m",
     hdbType: "5-room",
+    imageUrl:
+      "https://ohmyhome.com/wp-content/uploads/2021/07/IMG_9026-2-1-e1633056815164.jpg",
   },
   {
     address: "101 Clementi Avenue 3",
@@ -44,6 +50,8 @@ const seedData = [
     area: "Clementi",
     distanceMrt: "150m",
     hdbType: "3-room",
+    imageUrl:
+      "https://ohmyhome.com/wp-content/uploads/2021/08/IMG_9074-2-scaled.jpg",
   },
   {
     address: "202 Bedok North Street 1",
@@ -51,6 +59,8 @@ const seedData = [
     area: "Bedok",
     distanceMrt: "600m",
     hdbType: "4-room",
+    imageUrl:
+      "https://ohmyhome.com/wp-content/uploads/2021/08/IMG_9074-2-scaled.jpg",
   },
   {
     address: "303 Jurong East Street 21",
@@ -58,13 +68,15 @@ const seedData = [
     area: "Jurong East",
     distanceMrt: "500m",
     hdbType: "5-room",
+    imageUrl:
+      "https://ohmyhome.com/wp-content/uploads/2021/08/IMG_9074-2-scaled.jpg",
   },
 ];
 
 // Seed function
 const seedDB = async () => {
   try {
-    // Clear the existing data
+    // Clear the existing data to reset first.
     await Property.deleteMany({});
     console.log("Existing data cleared");
 
@@ -77,4 +89,5 @@ const seedDB = async () => {
   }
 };
 
+//com only call
 seedDB();
