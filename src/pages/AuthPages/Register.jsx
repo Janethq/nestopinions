@@ -3,13 +3,14 @@ import "tailwindcss/tailwind.css";
 import debug from "debug";
 import { register } from "../../utils/services/auth";
 import { toast } from "react-hot-toast";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext.jsx";
 
 const log = debug("mern:AuthPages:Register");
 
 export default function Register() {
   const { setAuthUser } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const [userInfo, setUserInfo] = useState({
     username: "",
@@ -33,7 +34,7 @@ export default function Register() {
       } else {
         setAuthUser(user); //update state with new user
         toast.success("Registration successful!");
-        //navigate to ? either page user was on/ dashboard/ login?
+        navigate(`/${user._id}/dashboard`);
       }
     } catch (error) {
       setUserInfo({ ...userInfo, error: "Registration Failed" });
