@@ -31,9 +31,9 @@ const propertiesRouter = require("./routes/api/propertiesRouter");
 app.use("/api/properties", propertiesRouter);
 
 //m what they cannot catch, they throw here.
-app.get("/*", function (req, res) {
-  res.json({ error: "no page found" });
-});
+// app.get("/*", function (req, res) {
+//   res.json({ error: "no page found" });
+// });
 
 app.get("/*", function (req, res) {
   res.sendFile(path.join(__dirname, "public", "index.html"));

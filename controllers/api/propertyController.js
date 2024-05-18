@@ -64,6 +64,7 @@ const create = async (req, res) => {
   res.status(201).json(property); //return what you created
 };
 //SEED PROPERTIES
+
 const seed = async (req, res) => {
   // Clear the existing data
   await Property.deleteMany({});
@@ -72,6 +73,11 @@ const seed = async (req, res) => {
   console.log("Database okay!");
   res.status(201).json(property); //return what you created
 };
+
+// const seed = async (req, res) => {
+//   console.log("It works");
+//   res.status(200).send("It works");
+// };
 
 //SEE ALL PROPERTIES
 const index = async (req, res) => {

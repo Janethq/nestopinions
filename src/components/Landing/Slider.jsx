@@ -25,7 +25,7 @@ const Slider = () => {
         </div>
         <div className="slide min-w-full">
           <img
-            src="TAMPINES01.jpeg"
+            src="/images/front1.jpeg"
             alt="Image 2"
             className="w-full h-auto rounded-lg"
           />
