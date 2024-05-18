@@ -1,13 +1,16 @@
 import { useContext } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 
 export default function NavBar() {
   const { setAuthUser, authUser } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     setAuthUser(null);
     localStorage.removeItem("token");
+    document.cookie = "token=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    navigate("/"); //back to landing
   };
 
   if (authUser) {
