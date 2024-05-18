@@ -13,9 +13,9 @@ function ReviewForm() {
     };
     console.log(formObj);
     // Send a POST request to the new route with the form data
- //http://localhost:5173/addreview
+    //http://localhost:5173/addreview
     try {
-      const res = await fetch(fetch(`/api/addreview`), {
+      const res = await fetch(`/api/reviews/create`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
