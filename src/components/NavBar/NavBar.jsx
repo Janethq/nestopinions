@@ -10,7 +10,7 @@ export default function NavBar() {
 
   const handleLogout = () => {
     setAuthUser(null);
-    removeToken(); // localStorage.removeItem("token");
+    removeToken(); //localStorage.removeItem("token");
     // document.cookie = "token=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT";
     toast.success("You have successfully logged out.");
     navigate("/"); //back to landing
