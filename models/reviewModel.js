@@ -7,6 +7,9 @@ const reviewSchema = mongoose.Schema(
       required: true,
       enum: ["Morning", "Afternoon", "Evening", "Night"],
     },
+    propertyId: {
+      type: String,
+    },
     rating: {
       type: Number,
       required: true,
