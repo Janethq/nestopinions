@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
 
-export default function ReviewDetails({propertyId}) {
+export default function ReviewDetails({ propertyId }) {
   const [reviewData, setReviewData] = useState([]);
 
   const fetchData = async () => {
@@ -23,10 +23,23 @@ export default function ReviewDetails({propertyId}) {
       await fetch(`/api/reviews/${id}`, {
         method: "DELETE",
       });
-      fetchData()
+      fetchData();
     } catch (error) {
       console.log(error.message);
     }
+  };
+
+  //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
+  const handleHighRating = () => {
+    //create new array and re-render
+    const sortHighest = [...reviewData].sort((a, b) => b.rating - a.rating);
+    setReviewData(sortHighest);
+  };
+
+  const handleLowRating = () => {
+    //create new array and re-render
+    const sortHighest = [...reviewData].sort((a, b) => a.rating - b.rating);
+    setReviewData(sortHighest);
   };
 
   const displayReviews = () => {
@@ -72,6 +85,12 @@ export default function ReviewDetails({propertyId}) {
   return (
     <>
       <h1>Review Details</h1>
+      <div>
+        <button onClick={handleHighRating}>Highest Rating</button>
+      </div>
+      <div>
+        <button onClick={handleLowRating}>Lowest Rating</button>
+      </div>
       {displayReviews()}
     </>
   );
