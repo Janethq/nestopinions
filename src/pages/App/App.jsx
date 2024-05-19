@@ -5,7 +5,7 @@ import { LandingPage } from "../LandingPage";
 import Register from "../AuthPages/Register";
 import Login from "../AuthPages/Login";
 import ProtectedRoute from "../../components/ProtectedRoutes";
-import DashboardPage from "../DashboardPage";
+import DashboardPage from "../Dashboard/DashboardPage";
 // import { useState } from "react";
 import { Toaster } from "react-hot-toast";
 
