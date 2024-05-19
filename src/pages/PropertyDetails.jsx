@@ -1,10 +1,13 @@
-import { useEffect, useState } from "react";
-import { NavLink, useParams } from "react-router-dom";
+import { useEffect, useState, useContext } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import ReviewDetails from "../components/ReviewDetails/ReviewDetails";
+import { AuthContext } from "../context/AuthContext";
 
 export default function PropertyDetails() {
   const { id } = useParams();
   const [propertyDetails, setPropertyDetails] = useState(null);
+  const navigate = useNavigate();
+  const { authUser } = useContext(AuthContext);
 
   useEffect(() => {
     const fetchPropertyDetails = async () => {
@@ -35,6 +38,14 @@ export default function PropertyDetails() {
     }
   };
 
+  const handleAddReview = () => {
+    if (authUser) {
+      navigate(`/property/${id}/addReview/${authUser._id}`);
+    } else {
+      navigate("/login", { state: { from: `/property/${id}/addReview` } });
+    }
+  };
+
   if (!propertyDetails) {
     return <div>Loading...</div>;
   }
@@ -52,7 +63,8 @@ export default function PropertyDetails() {
         <p>No image available</p>
       )}
       <br />
-      <NavLink to={`/property/${id}/addReview`}>Add Review</NavLink>
+      {/* <NavLink to={`/property/${id}/addReview`}>Add Review</NavLink> */}
+      <button onClick={handleAddReview}>Add Review</button>
       <ReviewDetails propertyId={id} />
       <button onClick={handleShare}>Share</button>
     </div>

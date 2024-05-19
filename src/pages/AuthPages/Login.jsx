@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import "tailwindcss/tailwind.css";
 import debug from "debug";
 import { login } from "../../utils/services/auth";
@@ -11,6 +11,9 @@ const log = debug("mern:AuthPages:Login");
 export default function Login() {
   const { setAuthUser, authUser } = useContext(AuthContext);
   const navigate = useNavigate();
+  const location = useLocation();
+  // const from = location.state?.from?.pathname || "/";
+  const from = location.state?.from || "/";
 
   const loginUser = async (e) => {
     e.preventDefault();
@@ -25,7 +28,24 @@ export default function Login() {
       log("userAtLogin: ", user); //-->can use directly
       setAuthUser(user);
       log("login: ", authUser); //--> null (rmb async, not immediate update, so dont use in navigate)
-      navigate(`/${user._id}/dashboard`);
+
+      // navigate(`/${user._id}/dashboard`); // initially redirect to dashboard
+
+      //redirect to review form for property -->addReview (protectRoutes)
+
+      // const redirectUrl = from.includes(":userId")
+      //   ? from.replace(":userId", user._id)
+      //   : `/${user._id}${from}`;
+
+      // navigate(redirectUrl, { replace: true });
+      // navigate(from, { replace: true }); // redirect to the original page
+
+      const redirectUrl = from.includes("addReview")
+        ? `${from}/${user._id}`
+        : from;
+
+      navigate(redirectUrl, { replace: true });
+
       toast.success("Login successful!");
     } catch (error) {
       toast.error("Login failed");
