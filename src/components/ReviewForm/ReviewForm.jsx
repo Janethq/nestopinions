@@ -1,10 +1,14 @@
 import "tailwindcss/tailwind.css";
+import { useParams } from "react-router-dom";
 
 function ReviewForm() {
+  const { id } = useParams();
   const handleSubmit = async (e) => {
     e.preventDefault();
     // process formData
     const formObj = {
+      // take property ID from mongo and reference here
+      propertyId: id,
       time: e.target.time.value,
       rating: Number(e.target.rating.value),
       looksNew: e.target.looksNew.value,
@@ -15,7 +19,7 @@ function ReviewForm() {
     // Send a POST request to the new route with the form data
     //http://localhost:5173/addreview
     try {
-      const res = await fetch(`/api/reviews/create`, {
+      const res = await fetch(`/api/reviews/property/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

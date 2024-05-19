@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
+import ReviewDetails from "../components/ReviewDetails/ReviewDetails";
 
 export default function PropertyDetails() {
   const { id } = useParams();
@@ -51,6 +52,8 @@ export default function PropertyDetails() {
         <p>No image available</p>
       )}
       <br />
+      <NavLink to={`/addreview/${id}`}>Add Review</NavLink>
+      <ReviewDetails propertyId={id}/>
       <button onClick={handleShare}>Share</button>
     </div>
   );

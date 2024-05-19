@@ -1,11 +1,12 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
 
-export default function ReviewDetails() {
+export default function ReviewDetails({propertyId}) {
   const [reviewData, setReviewData] = useState([]);
 
   const fetchData = async () => {
     try {
-      const response = await fetch(`/api/reviews`);
+      const response = await fetch(`/api/reviews/${propertyId}`);
       const data = await response.json();
       console.log(data);
       setReviewData(data);
