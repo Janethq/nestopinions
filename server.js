@@ -2,9 +2,9 @@ const express = require("express");
 const path = require("path");
 const logger = require("morgan");
 const debug = require("debug")("mern:server");
-// const cors = require("cors"); //for security
-// const corsOptions = require("./config/corsOptions");
-const cookieParser = require("cookie-parser");
+
+const cors = require("cors"); //for security
+const corsOptions = require("./config/corsOptions");
 const { verifyJWT } = require("./config/verifyToken");
 require("dotenv").config();
 
@@ -15,10 +15,11 @@ const app = express();
 app.use(logger("dev"));
 app.use(express.json()); //middleware (json data --> req.body)
 app.use(express.urlencoded({ extended: true }));
+app.use(cors(corsOptions));
+
 app.use("/public", express.static("public")); //m static files from public directory
 app.use("/public", express.static(path.join(__dirname, "public"))); //m
-// app.use(cors(corsOptions));
-app.use(cookieParser()); //middleware (jwt --> cookie)
+
 app.use(verifyJWT);
 
 app.use(express.static(path.join(__dirname, "/public")));
@@ -38,6 +39,7 @@ app.use("/api/properties", propertiesRouter);
 app.get("/*", function (req, res) {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
+
 
 const port = process.env.PORT || 3000;
 

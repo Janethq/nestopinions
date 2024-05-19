@@ -1,12 +1,17 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "tailwindcss/tailwind.css";
 import debug from "debug";
 import { login } from "../../utils/services/auth";
 import toast from "react-hot-toast";
+import { AuthContext } from "../../context/AuthContext.jsx";
+import { useContext } from "react";
 
 const log = debug("mern:AuthPages:Login");
 
-export default function Login({ setUser }) {
+export default function Login() {
+  const { setAuthUser, authUser } = useContext(AuthContext);
+  const navigate = useNavigate();
+
   const loginUser = async (e) => {
     e.preventDefault();
 
@@ -17,10 +22,11 @@ export default function Login({ setUser }) {
     try {
       const { email, password } = data;
       const user = await login(email, password);
-
-      setUser(user); //--> undefined
+      log("userAtLogin: ", user); //-->can use directly
+      setAuthUser(user);
+      log("login: ", authUser); //--> null (rmb async, not immediate update, so dont use in navigate)
+      navigate(`/${user._id}/dashboard`);
       toast.success("Login successful!");
-      //navigate to ?
     } catch (error) {
       toast.error("Login failed");
     }

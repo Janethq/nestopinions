@@ -3,6 +3,7 @@ const { default: toast } = require("react-hot-toast");
 const User = require("../models/user");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const { getUser } = require("../config/verifyToken");
 
 // testing to ensure endpoint is working
 const test = (req, res) => {
@@ -11,7 +12,7 @@ const test = (req, res) => {
 
 //helper function
 const createJWT = (user) =>
-  jwt.sign({ user }, process.env.SECRET, { expiresIn: "10s" });
+  jwt.sign({ user }, process.env.SECRET, { expiresIn: "30s" });
 
 // register
 const registerUser = async (req, res) => {
@@ -39,7 +40,6 @@ const registerUser = async (req, res) => {
     // res.status(201).json({ user });
 
     const token = createJWT(user);
-    res.cookie("token", token, { httpOnly: true, secure: true });
     res.status(201).json(token);
   } catch (error) {
     debug("error: %o", error);
@@ -65,7 +65,6 @@ const loginUser = async (req, res) => {
     if (match) {
       //   res.status(200).json({ message: "Login successful" });
       const token = createJWT(user);
-      res.cookie("token", token, { httpOnly: true, secure: true });
       res.status(201).json(token);
     }
     if (!match) {
@@ -78,7 +77,7 @@ const loginUser = async (req, res) => {
 };
 
 const checkToken = (req, res) => {
-  const user = res.locals.user;
+  const user = getUser(req, res); //res.locals.user;
   if (user) {
     res.status(200).json({ user });
   } else {
