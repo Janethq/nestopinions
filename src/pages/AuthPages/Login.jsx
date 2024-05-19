@@ -29,12 +29,10 @@ export default function Login() {
       setAuthUser(user);
       log("login: ", authUser); //--> null (rmb async, not immediate update, so dont use in navigate)
 
-      // navigate(`/${user._id}/dashboard`); // initially redirect to dashboard
-
-      //redirect to review form for property -->addReview (protectRoutes)
+      // redirect url paths
       const redirectUrl = from.includes("addReview")
-        ? `${from}/${user._id}`
-        : from;
+        ? `${from}/${user._id}` // redirect to review form
+        : `/${user._id}/dashboard`; // redirect to dashboard if user didnt come from addReview
 
       navigate(redirectUrl, { replace: true });
 
