@@ -27,7 +27,6 @@ function ReviewForm() {
         body: JSON.stringify(formObj),
       });
       console.log(res);
-      // go back to property details page after submit to see your review
       window.location.href = `/property/${id}`;
     } catch (error) {
       console.log(error);
