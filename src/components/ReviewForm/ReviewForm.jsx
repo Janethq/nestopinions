@@ -78,8 +78,9 @@ function ReviewForm() {
               id="looks-new"
               className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             >
-              <option value="Yes">Yes</option>
-              <option value="No">No</option>
+              {/* for boolean values, must wrap with curly brackets */}
+              <option selected="selected" value={true}>Yes</option>
+              <option value={false}>No</option>
             </select>
           </div>
           <div className="flex flex-col">

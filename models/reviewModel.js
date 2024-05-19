@@ -17,9 +17,8 @@ const reviewSchema = mongoose.Schema(
       max: 5,
     },
     looksNew: {
-      type: String,
+      type: Boolean,
       required: true,
-      enum: ["Yes", "No"],
     },
     pros: {
       type: String,

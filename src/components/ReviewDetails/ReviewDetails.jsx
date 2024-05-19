@@ -43,10 +43,12 @@ export default function ReviewDetails({ propertyId }) {
   };
 
   const handleMorningTime = () => {
-    const morningReviews = reviewData.filter((review) => review.time === 'Morning')
-    console.log(morningReviews)
-    setReviewData(morningReviews)
-  }
+    const morningReviews = reviewData.filter(
+      (review) => review.time === "Morning"
+    );
+    console.log(morningReviews);
+    setReviewData(morningReviews);
+  };
 
   const handleAfternoonTime = () => {
     const afternoonReviews = reviewData.filter(
@@ -65,14 +67,24 @@ export default function ReviewDetails({ propertyId }) {
   };
 
   const handleNightTime = () => {
-    const nightReviews = reviewData.filter(
-      (review) => review.time === "Night"
-    );
+    const nightReviews = reviewData.filter((review) => review.time === "Night");
     console.log(nightReviews);
     setReviewData(nightReviews);
   };
 
-  
+  const handleLooksNew = () => {
+    const looksNewReviews = reviewData.filter(
+      (review) => review.looksNew === true
+    );
+    setReviewData(looksNewReviews);
+  };
+
+  const handleLooksOld = () => {
+    const looksOldReviews = reviewData.filter(
+      (review) => review.looksNew === false
+    );
+    setReviewData(looksOldReviews);
+  };
 
   const displayReviews = () => {
     if (reviewData.length > 0) {
@@ -135,12 +147,12 @@ export default function ReviewDetails({ propertyId }) {
       <div>
         <button onClick={handleNightTime}>Evening Visits</button>
       </div>
-      {/* <div>
+      <div>
         <button onClick={handleLooksNew}>LooksNew</button>
       </div>
       <div>
         <button onClick={handleLooksOld}>LooksOld</button>
-      </div> */}
+      </div>
       {displayReviews()}
     </>
   );
