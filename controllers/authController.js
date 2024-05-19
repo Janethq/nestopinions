@@ -85,9 +85,42 @@ const checkToken = (req, res) => {
   }
 };
 
+//dashboard updatepw
+const updatePassword = async (req, res) => {
+  const { userId, currentPassword, newPassword } = req.body;
+
+  try {
+    // Check if the user exists
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(400).json({ message: "User not found." });
+    }
+
+    // Compare the current password
+    const match = await bcrypt.compare(currentPassword, user.password);
+    if (!match) {
+      return res.status(400).json({ message: "Invalid current password." });
+    }
+
+    // Update the password directly in the database using findOneAndUpdate
+    await User.findOneAndUpdate(
+      { _id: userId },
+      //   { $set: { password: newPassword } }, --> wasnt hashed
+      { $set: { password: await bcrypt.hash(newPassword, 6) } },
+      { new: true }
+    );
+
+    res.status(200).json({ message: "Password updated successfully." });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error." });
+  }
+};
+
 module.exports = {
   test,
   registerUser,
   loginUser,
   checkToken,
+  updatePassword,
 };

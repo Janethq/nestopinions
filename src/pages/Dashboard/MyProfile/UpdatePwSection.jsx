@@ -1,6 +1,44 @@
+import toast from "react-hot-toast";
+import { useNavigate, useParams } from "react-router-dom";
+
 const UpdatePwSection = ({ currPw, setCurrPw, newPw, setNewPw }) => {
-  const handleUpdatePw = (e) => {
+  const { userId } = useParams();
+  const navigate = useNavigate();
+
+  const handleUpdatePw = async (e) => {
     e.preventDefault();
+
+    try {
+      const token = localStorage.getItem("token"); // retrieve token from local storage
+      const response = await fetch("/api/users/update-password", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`, // using old JWT for authorization
+        },
+        body: JSON.stringify({
+          userId: `${userId}`, // Replace with the actual user ID
+          currentPassword: currPw, // Use currPw state value
+          newPassword: newPw, // Use newPw state value
+        }),
+      });
+      // eslint-disable-next-line no-unused-vars
+      const data = await response.json();
+      if (response.ok) {
+        // Password update successful
+        localStorage.removeItem("token"); // remove old JWT from local storage cos would cause auth issues
+        // Redirect to login page or handle success message
+        toast.success("Password updated successfully. Required to re-login.");
+        navigate("/login");
+      } else {
+        // Password update failed, handle error
+        toast.error("Failed to update password");
+      }
+    } catch (error) {
+      console.error("Error updating password:", error);
+      // Handle network or server errors
+      toast.error("Failed to update password due to server error");
+    }
   };
 
   return (
