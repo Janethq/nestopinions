@@ -77,9 +77,10 @@ function ReviewForm() {
               name="looksNew"
               id="looks-new"
               className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              defaultValue={true}
             >
               {/* for boolean values, must wrap with curly brackets because its javasript */}
-              <option selected="selected" value={true}>Yes</option>
+              <option value={true}>Yes</option>
               <option value={false}>No</option>
             </select>
           </div>
