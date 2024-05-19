@@ -15,22 +15,6 @@ const index = async (req, res) => {
   res.json(reviews);
 };
 
-const update = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const updatedReview = await Review.findByIdAndUpdate(id, req.body, {
-      new: true,
-    });
-    if (!updatedReview) {
-      return res.status(404).json({ message: "Review not found" });
-    }
-    res.status(200).json(updatedReview);
-  } catch (error) {
-    console.log(error.message);
-    res.status(500).json({ message: error.message });
-  }
-};
-
 const remove = async (req, res) => {
   try {
     const { id } = req.params;
@@ -47,14 +31,24 @@ const remove = async (req, res) => {
   }
 };
 
-const test = async (req, res) => {
-  res.json({ route: "reviews-test" });
+const getOne = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const reviews = await Review.find({
+      propertyId: id,
+    });
+    console.log("this is reviews");
+    console.log(reviews);
+    res.json(reviews);
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).json({ message: error.message });
+  }
 };
 
 module.exports = {
   create,
   index,
-  test,
-  update,
+  getOne,
   remove,
 };

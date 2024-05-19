@@ -70,6 +70,13 @@ const SearchBar = () => {
             key={property._id}
             className="p-4 border border-gray-200 rounded-lg mb-4"
           >
+            {property.image && (
+              <img
+                src={property.image}
+                alt={`${property.address}`}
+                className="w-full h-48 object-cover rounded-lg mb-4"
+              />
+            )}
             <p className="text-gray-700">
               <strong>Area:</strong> {property.area}
             </p>

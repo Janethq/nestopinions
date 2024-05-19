@@ -39,7 +39,7 @@ function App() {
 
           <Route path="/addReview" element={<ReviewForm />} />
           <Route path="/property/:id" element={<PropertyDetails />} />
-          <Route path="/addreview" element={<ReviewForm />} />
+          <Route path="/addreview/:id" element={<ReviewForm />} />
           <Route path="/seereview" element={<ReviewDetails />} />
           <Route path="/addproperty" element={<PropertyFormPage />} />
         </Routes>

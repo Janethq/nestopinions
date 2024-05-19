@@ -14,10 +14,10 @@ function PropertyFormPage() {
 
       const data = await response.json();
       console.log(data);
-      // Handle success (e.g., show a success message, redirect, etc.)
+     
     } catch (error) {
       console.error("Error:", error);
-      // Handle error (e.g., show an error message)
+    
     }
   };
 
