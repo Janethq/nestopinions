@@ -1,0 +1,15 @@
+meta {
+  name: checkToken
+  type: http
+  seq: 5
+}
+
+get {
+  url: http://localhost:3000/api/users/check-token
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY2NDYyZmU0MTU4YWZlZDk2YzM4ZjEwZSIsInVzZXJuYW1lIjoidGVzdCIsImVtYWlsIjoidGVzdEBtYWlsLmNvbSIsImNyZWF0ZWRBdCI6IjIwMjQtMDUtMTZUMTY6MTA6MTIuNjQ1WiIsInVwZGF0ZWRBdCI6IjIwMjQtMDUtMTZUMTY6MTA6MTIuNjQ1WiIsIl9fdiI6MH0sImlhdCI6MTcxNjAyMTgwOSwiZXhwIjoxNzE2MDIxODM5fQ.Rumxv9zkog0dBbfFtiz3oXp3pjc2iaPs-NzNpKGM1Ss
+}

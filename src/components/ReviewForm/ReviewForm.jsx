@@ -78,7 +78,7 @@ function ReviewForm() {
               id="looks-new"
               className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             >
-              {/* for boolean values, must wrap with curly brackets */}
+              {/* for boolean values, must wrap with curly brackets because its javasript */}
               <option selected="selected" value={true}>Yes</option>
               <option value={false}>No</option>
             </select>

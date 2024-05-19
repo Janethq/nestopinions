@@ -42,6 +42,7 @@ export default function ReviewDetails({ propertyId }) {
     setReviewData(sortHighest);
   };
 
+  //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter
   const handleMorningTime = () => {
     const morningReviews = reviewData.filter(
       (review) => review.time === "Morning"
