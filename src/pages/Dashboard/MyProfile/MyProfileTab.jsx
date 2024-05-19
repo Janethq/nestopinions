@@ -1,8 +1,12 @@
 import AcctInfoSection from "./AcctInfoSection";
 import UpdatePwSection from "./UpdatePwSection";
 import DeleteAcctSection from "./DeleteAcctSection";
+import { useState } from "react";
 
 const MyProfileTab = ({ email, username }) => {
+  const [currPw, setCurrPw] = useState("");
+  const [newPw, setNewPw] = useState("");
+
   return (
     <div>
       <div className="pt-4">
@@ -13,7 +17,12 @@ const MyProfileTab = ({ email, username }) => {
       <hr className="mt-4 mb-8" />
       <AcctInfoSection email={email} username={username} />
       <hr className="mt-4 mb-8" />
-      <UpdatePwSection />
+      <UpdatePwSection
+        currPw={currPw}
+        setCurrPw={setCurrPw}
+        newPw={newPw}
+        setNewPw={setNewPw}
+      />
       <hr className="mt-4 mb-8" />
       <DeleteAcctSection />
     </div>
