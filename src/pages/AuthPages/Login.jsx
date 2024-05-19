@@ -32,14 +32,6 @@ export default function Login() {
       // navigate(`/${user._id}/dashboard`); // initially redirect to dashboard
 
       //redirect to review form for property -->addReview (protectRoutes)
-
-      // const redirectUrl = from.includes(":userId")
-      //   ? from.replace(":userId", user._id)
-      //   : `/${user._id}${from}`;
-
-      // navigate(redirectUrl, { replace: true });
-      // navigate(from, { replace: true }); // redirect to the original page
-
       const redirectUrl = from.includes("addReview")
         ? `${from}/${user._id}`
         : from;
