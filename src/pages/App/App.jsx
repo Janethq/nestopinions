@@ -24,10 +24,8 @@ function App() {
         <Toaster />
         <Routes>
           <Route path="/" element={<LandingPage />} />
-
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
-
           <Route
             path="/:userId/dashboard"
             element={
@@ -36,10 +34,11 @@ function App() {
               </ProtectedRoute>
             }
           />
-
-          <Route path="/addReview" element={<ReviewForm />} />
+          {/* <Route path="/addReview" element={<ReviewForm />} /> //to see form page*/}
           <Route path="/property/:id" element={<PropertyDetails />} />
-          <Route path="/addreview/:id" element={<ReviewForm />} />
+          {/* <Route path="/addreview/:id" element={<ReviewForm />} /> //wrong url path */}
+          <Route path="/property/:id/addReview" element={<ReviewForm />} />{" "}
+          {/* fix path */}
           <Route path="/seereview" element={<ReviewDetails />} />
           <Route path="/addproperty" element={<PropertyFormPage />} />
         </Routes>

@@ -52,8 +52,8 @@ export default function PropertyDetails() {
         <p>No image available</p>
       )}
       <br />
-      <NavLink to={`/addreview/${id}`}>Add Review</NavLink>
-      <ReviewDetails propertyId={id}/>
+      <NavLink to={`/property/${id}/addReview`}>Add Review</NavLink>
+      <ReviewDetails propertyId={id} />
       <button onClick={handleShare}>Share</button>
     </div>
   );
