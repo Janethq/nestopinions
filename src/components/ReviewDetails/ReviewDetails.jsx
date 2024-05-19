@@ -73,19 +73,15 @@ export default function ReviewDetails({ propertyId }) {
     setReviewData(nightReviews);
   };
 
-  const handleLooksNew = () => {
-    const looksNewReviews = reviewData.filter(
-      (review) => review.looksNew === true
-    );
-    setReviewData(looksNewReviews);
-  };
+const handleLooksNew = () => {
+  const filteredReviews = reviewData.filter((review) => review.looksNew);
+  setReviewData(filteredReviews);
+};
 
-  const handleLooksOld = () => {
-    const looksOldReviews = reviewData.filter(
-      (review) => review.looksNew === false
-    );
-    setReviewData(looksOldReviews);
-  };
+const handleLooksOld = () => {
+  const filteredReviews = reviewData.filter((review) => !review.looksNew);
+  setReviewData(filteredReviews);
+};
 
   const displayReviews = () => {
     if (reviewData.length > 0) {
@@ -105,7 +101,7 @@ export default function ReviewDetails({ propertyId }) {
           </div>
           <div>
             <label>Looks New?: </label>
-            <span>{review.looksNew}</span>
+            <span>{review.looksNew ? "Yes" : "No"}</span>
           </div>
           <div>
             <label>Pros: </label>
