@@ -146,7 +146,7 @@ export default function ReviewDetails({ propertyId }) {
         <button onClick={handleEveningTime}>Evening Visits</button>
       </div>
       <div>
-        <button onClick={handleNightTime}>Evening Visits</button>
+        <button onClick={handleNightTime}>Night Visits</button>
       </div>
       <div>
         <button onClick={handleLooksNew}>LooksNew</button>
