@@ -42,6 +42,38 @@ export default function ReviewDetails({ propertyId }) {
     setReviewData(sortHighest);
   };
 
+  const handleMorningTime = () => {
+    const morningReviews = reviewData.filter((review) => review.time === 'Morning')
+    console.log(morningReviews)
+    setReviewData(morningReviews)
+  }
+
+  const handleAfternoonTime = () => {
+    const afternoonReviews = reviewData.filter(
+      (review) => review.time === "Afternoon"
+    );
+    console.log(afternoonReviews);
+    setReviewData(afternoonReviews);
+  };
+
+  const handleEveningTime = () => {
+    const eveningReviews = reviewData.filter(
+      (review) => review.time === "Evening"
+    );
+    console.log(eveningReviews);
+    setReviewData(eveningReviews);
+  };
+
+  const handleNightTime = () => {
+    const nightReviews = reviewData.filter(
+      (review) => review.time === "Night"
+    );
+    console.log(nightReviews);
+    setReviewData(nightReviews);
+  };
+
+  
+
   const displayReviews = () => {
     if (reviewData.length > 0) {
       return reviewData.map((review, index) => (
@@ -91,6 +123,24 @@ export default function ReviewDetails({ propertyId }) {
       <div>
         <button onClick={handleLowRating}>Lowest Rating</button>
       </div>
+      <div>
+        <button onClick={handleMorningTime}>Morning Visits</button>
+      </div>
+      <div>
+        <button onClick={handleAfternoonTime}>Afternoon Visits</button>
+      </div>
+      <div>
+        <button onClick={handleEveningTime}>Evening Visits</button>
+      </div>
+      <div>
+        <button onClick={handleNightTime}>Evening Visits</button>
+      </div>
+      {/* <div>
+        <button onClick={handleLooksNew}>LooksNew</button>
+      </div>
+      <div>
+        <button onClick={handleLooksOld}>LooksOld</button>
+      </div> */}
       {displayReviews()}
     </>
   );
