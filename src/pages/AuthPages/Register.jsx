@@ -35,6 +35,16 @@ export default function Register() {
         setAuthUser(user); //update state with new user
         toast.success("Registration successful!");
         navigate(`/${user._id}/dashboard`);
+
+        //enabling property--> add review --> login --> register --> add review OR dashboard
+        const from = sessionStorage.getItem("from"); //get stored destination
+
+        if (from && from.includes("addReview")) {
+          sessionStorage.removeItem("from"); // clear stored destination after retrieval
+          navigate(`${from}/${user._id}`); // redirect to the intended destination
+        } else {
+          navigate(`/${user._id}/dashboard`);
+        }
       }
     } catch (error) {
       setUserInfo({ ...userInfo, error: "Registration Failed" });

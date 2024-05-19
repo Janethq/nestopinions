@@ -42,7 +42,9 @@ export default function PropertyDetails() {
     if (authUser) {
       navigate(`/property/${id}/addReview/${authUser._id}`);
     } else {
-      navigate("/login", { state: { from: `/property/${id}/addReview` } });
+      const from = `/property/${id}/addReview`; 
+      sessionStorage.setItem("from", from); // storing the intended destination in session storage to redirect
+      navigate("/login", { state: { from }}); //pass the from state to login
     }
   };
 
