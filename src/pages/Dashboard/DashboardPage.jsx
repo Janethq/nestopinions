@@ -7,9 +7,12 @@ const DashboardPage = () => {
   const { authUser } = useContext(AuthContext);
   // eslint-disable-next-line no-unused-vars
   const [activeTab, setActiveTab] = useState("profileTab"); // or 'reviewsTab'
+  //for dropdown on narrower screens
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const handleTabSelection = (tab) => {
     setActiveTab(tab);
+    setIsDropdownOpen(false);
   };
 
   const getTabClassName = (tab) => {
@@ -32,12 +35,14 @@ const DashboardPage = () => {
             type="checkbox"
             name="select-1"
             id="select-1"
+            checked={isDropdownOpen}
+            onChange={() => setIsDropdownOpen(!isDropdownOpen)}
           />
           <label
             htmlFor="select-1"
             className="flex w-full cursor-pointer select-none rounded-lg border p-2 px-3 text-sm text-gray-700 ring-blue-700 peer-checked:ring"
           >
-            Profile
+            {activeTab === "profileTab" ? "My Profile" : "My Reviews"}
           </label>
           <svg
             xmlns="http://www.w3.org/2000/svg"
