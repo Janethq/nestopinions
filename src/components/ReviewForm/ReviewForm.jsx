@@ -1,8 +1,11 @@
 import "tailwindcss/tailwind.css";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 function ReviewForm() {
   const { id } = useParams();
+
+  const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     // process formData
@@ -27,7 +30,7 @@ function ReviewForm() {
         body: JSON.stringify(formObj),
       });
       console.log(res);
-      window.location.href = `/property/${id}`;
+      navigate(`/property/${id}`); //instead of using window.location.href to redirect
     } catch (error) {
       console.log(error);
     }
