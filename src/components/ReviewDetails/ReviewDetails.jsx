@@ -6,7 +6,7 @@ export default function ReviewDetails({propertyId}) {
 
   const fetchData = async () => {
     try {
-      const response = await fetch(`/api/reviews/${propertyId}`);
+      const response = await fetch(`/api/reviews/property/${propertyId}`);
       const data = await response.json();
       console.log(data);
       setReviewData(data);
