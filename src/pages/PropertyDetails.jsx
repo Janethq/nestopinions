@@ -40,11 +40,11 @@ export default function PropertyDetails() {
 
   const handleAddReview = () => {
     if (authUser) {
-      navigate(`/property/${id}/addReview/${authUser._id}`);
+      navigate(`/property/${id}/reviews/new`);
     } else {
-      const from = `/property/${id}/addReview`; 
+      const from = `/property/${id}/reviews`;
       sessionStorage.setItem("from", from); // storing the intended destination in session storage to redirect
-      navigate("/login", { state: { from }}); //pass the from state to login
+      navigate("/login", { state: { from } }); //pass the from state to login
     }
   };
 

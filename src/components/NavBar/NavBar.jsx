@@ -52,7 +52,7 @@ export default function NavBar() {
         {authUser ? (
           <>
             <NavLink
-              to={`/${authUser._id}/dashboard`}
+              to={`/dashboard`}
               className="flex items-center text-gray-900 hover:text-indigo-600"
             >
               <span>
@@ -99,4 +99,3 @@ export default function NavBar() {
     </nav>
   );
 }
-

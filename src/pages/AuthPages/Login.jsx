@@ -14,7 +14,7 @@ export default function Login() {
   const location = useLocation();
   // const from = location.state?.from?.pathname || "/";
   const from = location.state?.from || "/";
-
+  log("from ", from);
   const loginUser = async (e) => {
     e.preventDefault();
 
@@ -30,9 +30,9 @@ export default function Login() {
       log("login: ", authUser); //--> null (rmb async, not immediate update, so dont use in navigate)
 
       // redirect url paths
-      const redirectUrl = from.includes("addReview")
-        ? `${from}/${user._id}` // redirect to review form
-        : `/${user._id}/dashboard`; // redirect to dashboard if user didnt come from addReview
+      const redirectUrl = from.includes("reviews")
+        ? `${from}/new` // redirect to review form
+        : `/dashboard`; // redirect to dashboard if user didnt come from addReview button
 
       navigate(redirectUrl, { replace: true });
 
