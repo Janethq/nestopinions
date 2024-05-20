@@ -1,9 +1,9 @@
 const debug = require("debug")("mern:controllers:authController");
 const { default: toast } = require("react-hot-toast");
-const User = require("../models/user");
+const User = require("../../models/user");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const { getUser } = require("../config/verifyToken");
+const { getUser } = require("../../config/verifyToken");
 
 // testing to ensure endpoint is working
 const test = (req, res) => {

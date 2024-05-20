@@ -25,7 +25,7 @@ app.use(express.static(path.join(__dirname, "/dist")));
 app.use("/", require("./routes/api/root"));
 app.use("/api/users", require("./routes/api/authRoutes")); // proxy /api ===:3000
 
-app.use("/api/reviews", require("./routes/reviewRoutes"));
+app.use("/api/reviews", require("./routes/api/reviewRoutes"));
 
 const propertiesRouter = require("./routes/api/propertiesRouter");
 app.use("/api/properties", propertiesRouter);

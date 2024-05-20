@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const reviewsCtrl = require("../controllers/reviewsController");
-
+const reviewsCtrl = require("../../controllers/api/reviewsController");
 
 //get all reviews
 router.get("/", reviewsCtrl.index);
