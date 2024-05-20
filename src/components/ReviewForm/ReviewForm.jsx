@@ -1,7 +1,9 @@
 import "tailwindcss/tailwind.css";
 import { useNavigate, useParams } from "react-router-dom";
+import { useState } from "react";
 
 function ReviewForm() {
+  const [errorMsg, setErrorMsg] = useState("")
   const { id } = useParams();
 
   const navigate = useNavigate();
@@ -9,6 +11,12 @@ function ReviewForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     // process formData
+    if (e.target.pros.value === "" || e.target.cons.value === "") {
+      const message = "Please input Pros and Cons";
+      setErrorMsg(message);
+      //return stops this function from running if this condition happens
+      return
+    }
     const formObj = {
       // take property ID from mongo and reference here
       propertyId: id,
@@ -76,16 +84,16 @@ function ReviewForm() {
             <label htmlFor="looks-new" className="text-gray-700">
               Looks New?:
             </label>
-            <select
+            <input
+              type="checkbox"
               name="looksNew"
               id="looks-new"
               className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               defaultValue={true}
-            >
-              {/* for boolean values, must wrap with curly brackets because its javasript */}
-              <option value={true}>Yes</option>
-              <option value={false}>No</option>
-            </select>
+            />
+            {/* for boolean values, must wrap with curly brackets because its javasript */}
+            {/* <option value={true}>Yes</option>
+              <option value={false}>No</option> */}
           </div>
           <div className="flex flex-col">
             <label htmlFor="pros" className="text-gray-700">
@@ -109,6 +117,7 @@ function ReviewForm() {
               className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             ></textarea>
           </div>
+          <p className="text-rose-600">{errorMsg}</p>
           <button
             type="submit"
             value="submit"
