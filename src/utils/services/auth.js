@@ -12,7 +12,6 @@ export const getUser = () => {
 export const register = async (userData) => {
   log("userData: %o", userData);
 
-  // return userData for testing, without processing tokens yet
   const token = await usersAPI.register(userData);
   log("Response from server: %o", token);
   setToken(token);
