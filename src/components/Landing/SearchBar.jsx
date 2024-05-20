@@ -6,7 +6,14 @@ const SearchBar = () => {
   const [searchCriteria, setSearchCriteria] = useState("area"); // Default search criteria
   const [searchResults, setSearchResults] = useState([]);
 
+  //SEARCH BY CRITERIA, 3 QUERIES
+  //VALIDATE POSTAL CODE & ALERT USER.
   const handleSearch = async () => {
+    if (searchCriteria === "postalCode" && !/^\d{6}$/.test(query)) {
+      alert("Postal code must be exactly 6 digits");
+      return;
+    }
+
     try {
       const response = await fetch(
         `/api/properties/search?${searchCriteria}=${query}`
@@ -17,7 +24,7 @@ const SearchBar = () => {
       const data = await response.json();
       setSearchResults(data);
     } catch (error) {
-      console.error("i cannot find this property:", error);
+      console.error("I cannot find this property:", error);
       setSearchResults([]);
     }
   };
@@ -70,9 +77,9 @@ const SearchBar = () => {
             key={property._id}
             className="p-4 border border-gray-200 rounded-lg mb-4"
           >
-            {property.image && (
+            {property.imageUrl && (
               <img
-                src={property.image}
+                src={property.imageUrl}
                 alt={`${property.address}`}
                 className="w-full h-48 object-cover rounded-lg mb-4"
               />
