@@ -14,7 +14,8 @@ function ReviewForm() {
     if (e.target.pros.value === "" || e.target.cons.value === "") {
       const message = "Please input Pros and Cons";
       setErrorMsg(message);
-      return errorMsg
+      //return stops this function from running if this condition happens
+      return
     }
     const formObj = {
       // take property ID from mongo and reference here
