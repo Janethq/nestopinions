@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
 
-export default function ReviewDetails({propertyId}) {
+export default function ReviewDetails({ propertyId }) {
   const [reviewData, setReviewData] = useState([]);
 
   const fetchData = async () => {
@@ -23,11 +23,65 @@ export default function ReviewDetails({propertyId}) {
       await fetch(`/api/reviews/${id}`, {
         method: "DELETE",
       });
-      fetchData()
+      fetchData();
     } catch (error) {
       console.log(error.message);
     }
   };
+
+  //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
+  const handleHighRating = () => {
+    //create new array and re-render
+    const sortHighest = [...reviewData].sort((a, b) => b.rating - a.rating);
+    setReviewData(sortHighest);
+  };
+
+  const handleLowRating = () => {
+    //create new array and re-render
+    const sortHighest = [...reviewData].sort((a, b) => a.rating - b.rating);
+    setReviewData(sortHighest);
+  };
+
+  //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter
+  const handleMorningTime = () => {
+    const morningReviews = reviewData.filter(
+      (review) => review.time === "Morning"
+    );
+    console.log(morningReviews);
+    setReviewData(morningReviews);
+  };
+
+  const handleAfternoonTime = () => {
+    const afternoonReviews = reviewData.filter(
+      (review) => review.time === "Afternoon"
+    );
+    console.log(afternoonReviews);
+    setReviewData(afternoonReviews);
+  };
+
+  const handleEveningTime = () => {
+    const eveningReviews = reviewData.filter(
+      (review) => review.time === "Evening"
+    );
+    console.log(eveningReviews);
+    setReviewData(eveningReviews);
+  };
+
+  const handleNightTime = () => {
+    const nightReviews = reviewData.filter((review) => review.time === "Night");
+    console.log(nightReviews);
+    setReviewData(nightReviews);
+  };
+
+const handleLooksNew = () => {
+  const filteredReviews = reviewData.filter((review) => review.looksNew);
+  setReviewData(filteredReviews);
+};
+
+const handleLooksOld = () => {
+  const filteredReviews = reviewData.filter((review) => !review.looksNew);
+  setReviewData(filteredReviews);
+};
 
   const displayReviews = () => {
     if (reviewData.length > 0) {
@@ -47,7 +101,7 @@ export default function ReviewDetails({propertyId}) {
           </div>
           <div>
             <label>Looks New?: </label>
-            <span>{review.looksNew}</span>
+            <span>{review.looksNew ? "Yes" : "No"}</span>
           </div>
           <div>
             <label>Pros: </label>
@@ -72,6 +126,30 @@ export default function ReviewDetails({propertyId}) {
   return (
     <>
       <h1>Review Details</h1>
+      <div>
+        <button onClick={handleHighRating}>Highest Rating</button>
+      </div>
+      <div>
+        <button onClick={handleLowRating}>Lowest Rating</button>
+      </div>
+      <div>
+        <button onClick={handleMorningTime}>Morning Visits</button>
+      </div>
+      <div>
+        <button onClick={handleAfternoonTime}>Afternoon Visits</button>
+      </div>
+      <div>
+        <button onClick={handleEveningTime}>Evening Visits</button>
+      </div>
+      <div>
+        <button onClick={handleNightTime}>Night Visits</button>
+      </div>
+      <div>
+        <button onClick={handleLooksNew}>LooksNew</button>
+      </div>
+      <div>
+        <button onClick={handleLooksOld}>LooksOld</button>
+      </div>
       {displayReviews()}
     </>
   );

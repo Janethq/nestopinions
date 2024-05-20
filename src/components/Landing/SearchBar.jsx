@@ -78,6 +78,9 @@ const SearchBar = () => {
               />
             )}
             <p className="text-gray-700">
+              <strong>Address:</strong> {property.address}
+            </p>
+            <p className="text-gray-700">
               <strong>Area:</strong> {property.area}
             </p>
             <p className="text-gray-700">

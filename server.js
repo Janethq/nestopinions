@@ -18,26 +18,20 @@ app.use(express.urlencoded({ extended: true }));
 // app.use(cors(corsOptions));
 
 app.use("/public", express.static("public")); //m static files from public directory
-app.use("/public", express.static(path.join(__dirname, "public"))); //m
 
 app.use(verifyJWT);
 
-app.use(express.static(path.join(__dirname, "/public")));
+app.use(express.static(path.join(__dirname, "/dist")));
 app.use("/", require("./routes/api/root"));
 app.use("/api/users", require("./routes/api/authRoutes")); // proxy /api ===:3000
 
-app.use("/api/reviews", require("./routes/reviewRoutes"));
+app.use("/api/reviews", require("./routes/api/reviewRoutes"));
 
 const propertiesRouter = require("./routes/api/propertiesRouter");
 app.use("/api/properties", propertiesRouter);
 
-//m what they cannot catch, they throw here.
-// app.get("/*", function (req, res) {
-//   res.json({ error: "no page found" });
-// });
-
 app.get("/*", function (req, res) {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
+  res.sendFile(path.join(__dirname, "dist", "index.html"));
 });
 
 const port = process.env.PORT || 3000;

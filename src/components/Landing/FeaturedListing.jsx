@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 function FeaturedListing() {
   const [properties, setProperties] = useState([]);
@@ -43,6 +44,12 @@ function FeaturedListing() {
               <p className="text-gray-700">
                 Postal Code: {property.postalCode}
               </p>
+              <Link
+                to={`/property/${property._id}`}
+                className="inline-block mt-4 px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-700"
+              >
+                View Details
+              </Link>
             </div>
           </div>
         ))}

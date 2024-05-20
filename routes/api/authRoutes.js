@@ -6,7 +6,7 @@ const {
   loginUser,
   checkToken,
   updatePassword,
-} = require("../../controllers/authController");
+} = require("../../controllers/api/authController");
 const { verifyJWT } = require("../../config/verifyToken");
 
 // /api/users

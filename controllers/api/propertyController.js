@@ -1,5 +1,6 @@
 const Property = require("../../models/property");
 
+//SEED DATA FOR EASY ACCESS
 const seedData = [
   {
     address: "525B Pasir Ris Street 51",
@@ -61,15 +62,14 @@ const seedData = [
 
 //CREATE PROPERTY
 const create = async (req, res) => {
-const body = req.body;
-//taking whatever it received, dig into data, grabbin the body
+  const body = req.body;
+  //taking whatever it received, dig into data, grabbin the body
   const property = await Property.create(body);
   res.status(201).json(property); //return what you created
 };
-//SEED PROPERTIES
 
+//SEED PROPERTIES
 const seed = async (req, res) => {
-  // Clear the existing data
   await Property.deleteMany({});
   console.log("Existing data cleared");
   const property = await Property.insertMany(seedData);
@@ -161,7 +161,7 @@ const show = async (req, res) => {
 // FEATURED LISTINGS
 const featured = async (req, res) => {
   try {
-    const featuredProperties = await Property.find({ hdbType: "4-room" });
+    const featuredProperties = await Property.find({});
     res.json(featuredProperties);
   } catch (error) {
     res.status(500).json({ error: error.message });
