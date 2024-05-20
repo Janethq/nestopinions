@@ -18,11 +18,11 @@ app.use(express.urlencoded({ extended: true }));
 // app.use(cors(corsOptions));
 
 app.use("/public", express.static("public")); //m static files from public directory
-app.use("/public", express.static(path.join(__dirname, "public"))); //m
+// app.use("/public", express.static(path.join(__dirname, "public"))); //m
 
 app.use(verifyJWT);
 
-app.use(express.static(path.join(__dirname, "/public")));
+app.use(express.static(path.join(__dirname, "/dist")));
 app.use("/", require("./routes/api/root"));
 app.use("/api/users", require("./routes/api/authRoutes")); // proxy /api ===:3000
 
