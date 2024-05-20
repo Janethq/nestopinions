@@ -20,6 +20,7 @@ const userSchema = new Schema(
       minLength: 3,
       required: true,
     },
+    reviewsPosted: [{type: Schema.Types.ObjectId, ref: "Review"}]
   },
   {
     timestamps: true,
