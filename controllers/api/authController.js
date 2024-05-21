@@ -117,10 +117,26 @@ const updatePassword = async (req, res) => {
   }
 };
 
+// dashboard MyReviewsTab
+const fetchUserReviews = async (req, res) => {
+  try {
+    const userId = res.locals.user._id; //based on storeUser in verifyToken
+    const user = await User.findById(userId).populate("reviewsPosted");
+    if (!user) {
+      return res.status(404).json({ error: "User not found." });
+    }
+    res.status(200).json(user.reviewsPosted); //array of reviewId
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Server error." });
+  }
+};
+
 module.exports = {
   test,
   registerUser,
   loginUser,
   checkToken,
   updatePassword,
+  fetchUserReviews,
 };
