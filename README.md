@@ -19,6 +19,8 @@
 ### Example Schema
 [Google Sheets](https://docs.google.com/spreadsheets/d/1En5AYS5Jb8o0fZvBJPKw_9DJl8ueUhnMdwmN__04wTc/edit?usp=sharing)
 
+### Deployed on Render
+Try it here: (https://nestopinion.onrender.com/)
 
 ## MERYL
 

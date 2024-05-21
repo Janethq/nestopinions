@@ -173,7 +173,7 @@ const handleLooksOld = () => {
             onClick={handleLooksNew}
             className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 focus:outline-none"
           >
-            LooksNew
+            Looks New
           </button>
         </div>
         <div>
@@ -181,7 +181,7 @@ const handleLooksOld = () => {
             onClick={handleLooksOld}
             className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 focus:outline-none"
           >
-            LooksOld
+            Looks Old
           </button>
         </div>
       </div>
