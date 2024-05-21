@@ -1,6 +1,8 @@
+// reviewModel.js
 const mongoose = require("mongoose");
+const { Schema } = mongoose;
 
-const reviewSchema = mongoose.Schema(
+const reviewSchema = new Schema(
   {
     time: {
       type: String,
@@ -8,7 +10,9 @@ const reviewSchema = mongoose.Schema(
       enum: ["Morning", "Afternoon", "Evening", "Night"],
     },
     propertyId: {
-      type: String,
+      type: Schema.Types.ObjectId,
+      ref: "Property",
+      required: true,
     },
     rating: {
       type: Number,
@@ -28,9 +32,18 @@ const reviewSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    reviewer: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    reviewer: { type: Schema.Types.ObjectId, ref: "User" },
   },
-  { timestamps: true }
+  {
+    timestamps: true,
+  }
 );
+
+// Add a static method to the schema
+reviewSchema.statics.getReviewsByPropertyId = async function (propertyId) {
+  const reviews = await this.find({ propertyId }).populate("propertyId").exec();
+
+  return reviews;
+};
 
 module.exports = mongoose.model("Review", reviewSchema);

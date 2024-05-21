@@ -41,4 +41,10 @@ const propertySchema = new Schema(
   }
 );
 
+propertySchema.virtual("reviews", {
+  ref: "Review",
+  localField: "_id",
+  foreignField: "propertyId",
+});
+
 module.exports = mongoose.model("Property", propertySchema);
