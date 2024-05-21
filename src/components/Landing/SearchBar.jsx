@@ -1,22 +1,16 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 
-const SearchBar = () => {
-  const [query, setQuery] = useState("");
-  const [searchCriteria, setSearchCriteria] = useState("area"); // Default search criteria
+function SearchBar() {
+  const [area, setArea] = useState("");
+  const [hdbType, setHdbType] = useState("");
+  const [postalCode, setPostalCode] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 
-  //SEARCH BY CRITERIA, 3 QUERIES
-  //VALIDATE POSTAL CODE & ALERT USER.
-  const handleSearch = async () => {
-    if (searchCriteria === "postalCode" && !/^\d{6}$/.test(query)) {
-      alert("Postal code must be exactly 6 digits");
-      return;
-    }
-
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     try {
       const response = await fetch(
-        `/api/properties/search?${searchCriteria}=${query}`
+        `/api/properties/search?area=${area}&hdbType=${hdbType}&postalCode=${postalCode}`
       );
       if (!response.ok) {
         throw new Error("Failed to fetch data");
@@ -24,89 +18,63 @@ const SearchBar = () => {
       const data = await response.json();
       setSearchResults(data);
     } catch (error) {
-      console.error("I cannot find this property:", error);
-      setSearchResults([]);
+      console.error("Error occurred while searching:", error);
     }
   };
 
   return (
-    <div className="max-w-lg mx-auto mt-10 p-4 bg-white shadow-lg rounded-lg">
-      <div className="mb-4">
-        <label
-          htmlFor="searchCriteria"
-          className="block text-gray-700 font-bold mb-2"
-        >
-          Search Criteria
-        </label>
+    <div>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="area">Area:</label>
         <select
-          id="searchCriteria"
-          value={searchCriteria}
-          onChange={(e) => setSearchCriteria(e.target.value)}
-          className="block w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          name="area"
+          id="area"
+          value={area}
+          onChange={(e) => setArea(e.target.value)}
         >
-          <option value="area">Estate Area</option>
-          <option value="postalCode">Postal Code</option>
-          <option value="hdbType">HDB Type</option>
+          <option value="">Select Area</option>
+          <option value="Pasir Ris">Pasir Ris</option>
+          <option value="Serangoon">Serangoon</option>
+          <option value="Tampines">Tampines</option>
         </select>
-      </div>
 
-      <div className="mb-4">
-        <label htmlFor="query" className="block text-gray-700 font-bold mb-2">
-          Search Query
-        </label>
+        <label htmlFor="hdbType">HDB Type:</label>
+        <select
+          name="hdbType"
+          id="hdbType"
+          value={hdbType}
+          onChange={(e) => setHdbType(e.target.value)}
+        >
+          <option value="">Select HDB Type</option>
+          <option value="3-room">3-room</option>
+          <option value="4-room">4-room</option>
+          <option value="5-room">5-room</option>
+        </select>
+
+        <label htmlFor="postalCode">Postal Code:</label>
         <input
-          id="query"
           type="text"
-          placeholder={`Search by ${searchCriteria}`}
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          className="block w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          id="postalCode"
+          name="postalCode"
+          value={postalCode}
+          onChange={(e) => setPostalCode(e.target.value)}
         />
-      </div>
 
-      <button
-        onClick={handleSearch}
-        className="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-      >
-        Search
-      </button>
+        <button type="submit">Search</button>
+      </form>
 
-      <div className="mt-6">
-        {searchResults.map((property) => (
-          <div
-            key={property._id}
-            className="p-4 border border-gray-200 rounded-lg mb-4"
-          >
-            {property.imageUrl && (
-              <img
-                src={property.imageUrl}
-                alt={`${property.address}`}
-                className="w-full h-48 object-cover rounded-lg mb-4"
-              />
-            )}
-            <p className="text-gray-700">
-              <strong>Address:</strong> {property.address}
-            </p>
-            <p className="text-gray-700">
-              <strong>Area:</strong> {property.area}
-            </p>
-            <p className="text-gray-700">
-              <strong>Postal Code:</strong> {property.postalCode}
-            </p>
-            <p className="text-gray-700">
-              <strong>HDB Type:</strong> {property.hdbType}
-            </p>
-            <Link
-              to={`/property/${property._id}`}
-              className="text-blue-500 hover:underline"
-            >
-              View Details
-            </Link>
-          </div>
-        ))}
+      <div>
+        <h2>Search Results</h2>
+        <ul>
+          {searchResults.map((property) => (
+            <li key={property._id}>
+              {property.address}, {property.area}, {property.hdbType}
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );
-};
+}
 
 export default SearchBar;

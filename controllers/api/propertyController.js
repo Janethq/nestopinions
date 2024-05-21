@@ -21,10 +21,10 @@ const seedData = [
       "https://ohmyhome.com/wp-content/uploads/2021/08/IMG_8871-2-scaled.jpg",
   },
   {
-    address: "789 Bukit Timah Road",
-    postalCode: 269791,
-    area: "Bukit Timah",
-    distanceMrt: "300m",
+    address: "201 Tampines st 21",
+    postalCode: 520201,
+    area: "Tampines",
+    distanceMrt: "800m",
     hdbType: "5-room",
     imageUrl:
       "https://ohmyhome.com/wp-content/uploads/2021/08/IMG_8942-2-scaled.jpg",
@@ -55,6 +55,15 @@ const seedData = [
     hdbType: "5-room",
     imageUrl:
       "https://i0.wp.com/lifefinance.com.sg/wp-content/uploads/2020/01/nguyen-thu-hoai-a15b7LYrfbk-unsplash-scaled.jpg?resize=768%2C472&ssl=1",
+  },
+  {
+    address: "894 Tampines Street 81",
+    postalCode: 520894,
+    area: "Tampines",
+    distanceMrt: "150m",
+    hdbType: "3-room",
+    imageUrl:
+      "https://ohmyhome.com/wp-content/uploads/2021/08/IMG_9074-2-scaled.jpg",
   },
 ];
 
