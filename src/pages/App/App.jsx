@@ -27,7 +27,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route
-            path="/:userId/dashboard"
+            path="/dashboard"
             element={
               <ProtectedRoute>
                 <DashboardPage />
@@ -39,7 +39,7 @@ function App() {
           {/* <Route path="/addreview/:id" element={<ReviewForm />} /> //wrong url path */}
           {/* <Route path="/property/:id/addReview" element={<ReviewForm />} /> // fix path */}
           <Route
-            path="/property/:id/addReview/:userId"
+            path="/property/:id/reviews/new"
             element={
               <ProtectedRoute>
                 <ReviewForm />

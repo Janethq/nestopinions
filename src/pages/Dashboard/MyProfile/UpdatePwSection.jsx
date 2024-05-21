@@ -1,8 +1,10 @@
 import toast from "react-hot-toast";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../../context/AuthContext";
+import { useContext } from "react";
 
 const UpdatePwSection = ({ currPw, setCurrPw, newPw, setNewPw }) => {
-  const { userId } = useParams();
+  const { authUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleUpdatePw = async (e) => {
@@ -17,9 +19,9 @@ const UpdatePwSection = ({ currPw, setCurrPw, newPw, setNewPw }) => {
           Authorization: `Bearer ${token}`, // using old JWT for authorization
         },
         body: JSON.stringify({
-          userId: `${userId}`, // Replace with the actual user ID
-          currentPassword: currPw, // Use currPw state value
-          newPassword: newPw, // Use newPw state value
+          userId: authUser._id, // get from context
+          currentPassword: currPw, // use currPw state value
+          newPassword: newPw, // use newPw state value
         }),
       });
       // eslint-disable-next-line no-unused-vars
@@ -27,9 +29,8 @@ const UpdatePwSection = ({ currPw, setCurrPw, newPw, setNewPw }) => {
       if (response.ok) {
         // Password update successful
         localStorage.removeItem("token"); // remove old JWT from local storage cos would cause auth issues
-        // Redirect to login page or handle success message
-        toast.success("Password updated successfully. Required to re-login.");
-        navigate("/login");
+        toast.success("Password updated successfully. Required to re-login."); //notify user
+        navigate("/login"); //redirect to login w new pw
       } else {
         // Password update failed, handle error
         toast.error("Failed to update password");

@@ -11,30 +11,9 @@ export default function NavBar() {
   const handleLogout = () => {
     setAuthUser(null);
     removeToken(); //localStorage.removeItem("token");
-    // document.cookie = "token=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT";
     toast.success("You have successfully logged out.");
     navigate("/"); //back to landing
   };
-
-  // if (authUser) {
-  //   return (
-  //     <nav>
-  //       <NavLink to="/">Home</NavLink>
-  //       <span>{authUser.username}</span>
-  //       <button onClick={handleLogout}>Sign Out</button>
-  //     </nav>
-  //   );
-  // }
-
-  // return (
-  //   <nav>
-  //     <NavLink to="/">Home</NavLink>
-  //     &nbsp; | &nbsp;
-  //     <NavLink to="/register">Register</NavLink>
-  //     &nbsp;&nbsp;
-  //     <NavLink to="/login">Login</NavLink>
-  //   </nav>
-  // );
 
   return (
     <nav className="flex justify-between items-center p-6 bg-white shadow-md">
@@ -52,7 +31,7 @@ export default function NavBar() {
         {authUser ? (
           <>
             <NavLink
-              to={`/${authUser._id}/dashboard`}
+              to={`/dashboard`}
               className="flex items-center text-gray-900 hover:text-indigo-600"
             >
               <span>
@@ -99,4 +78,3 @@ export default function NavBar() {
     </nav>
   );
 }
-

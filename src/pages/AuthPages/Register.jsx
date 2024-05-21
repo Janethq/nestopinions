@@ -34,16 +34,16 @@ export default function Register() {
       } else {
         setAuthUser(user); //update state with new user
         toast.success("Registration successful!");
-        navigate(`/${user._id}/dashboard`);
+        navigate(`/dashboard`);
 
         //enabling property--> add review --> login --> register --> add review OR dashboard
         const from = sessionStorage.getItem("from"); //get stored destination
 
-        if (from && from.includes("addReview")) {
+        if (from && from.includes("reviews")) {
           sessionStorage.removeItem("from"); // clear stored destination after retrieval
-          navigate(`${from}/${user._id}`); // redirect to the intended destination
+          navigate(`${from}/new`); // redirect to the intended destination
         } else {
-          navigate(`/${user._id}/dashboard`);
+          navigate(`/dashboard`);
         }
       }
     } catch (error) {

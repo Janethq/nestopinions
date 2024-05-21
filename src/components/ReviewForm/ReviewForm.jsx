@@ -1,21 +1,24 @@
 import "tailwindcss/tailwind.css";
 import { useNavigate, useParams } from "react-router-dom";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../context/AuthContext";
 
 function ReviewForm() {
-  const [errorMsg, setErrorMsg] = useState("")
-  const { id } = useParams();
+  const { id } = useParams(); //id === propertyId
+  const { authUser } = useContext(AuthContext);
+  const [errorMsg, setErrorMsg] = useState("");
 
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     // process formData
     if (e.target.pros.value === "" || e.target.cons.value === "") {
       const message = "Please input Pros and Cons";
       setErrorMsg(message);
       //return stops this function from running if this condition happens
-      return
+      return;
     }
     const formObj = {
       // take property ID from mongo and reference here
@@ -25,6 +28,7 @@ function ReviewForm() {
       looksNew: e.target.looksNew.value,
       pros: e.target.pros.value,
       cons: e.target.cons.value,
+      reviewer: authUser._id,
     };
     console.log(formObj);
     // Send a POST request to the new route with the form data
@@ -37,8 +41,11 @@ function ReviewForm() {
         },
         body: JSON.stringify(formObj),
       });
-      console.log(res);
-      navigate(`/property/${id}`); //instead of using window.location.href to redirect
+      if (res.ok) {
+        const data = await res.json();
+        console.log(data);
+        navigate(`/property/${id}`); //instead of using window.location.href to redirect
+      }
     } catch (error) {
       console.log(error);
     }
