@@ -1,4 +1,33 @@
-const MyReviewCard = ({ review, toggleReadMore, expandedReviewIds }) => {
+import toast from "react-hot-toast";
+
+const MyReviewCard = ({
+  review,
+  toggleReadMore,
+  expandedReviewIds,
+  myReviewToRemove,
+}) => {
+  const deleteUserReview = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch(`/api/users/my-reviews/${review._id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (response.ok) {
+        myReviewToRemove(review._id); // to update state in parent component
+        toast.success("Review deleted successfully");
+      } else {
+        console.error("Failed to delete review");
+      }
+    } catch (error) {
+      console.error("Error deleting review:", error);
+    }
+  };
+
   return (
     <div key={review._id} className="bg-white p-4 rounded-md shadow-md mb-4">
       <div className="flex items-center">
@@ -48,7 +77,9 @@ const MyReviewCard = ({ review, toggleReadMore, expandedReviewIds }) => {
         >
           {expandedReviewIds.has(review._id) ? "Read less" : "Read more"}
         </button>
-        <button className="text-red-500 ml-4 mt-2">Delete review</button>
+        <button className="text-red-500 ml-4 mt-2" onClick={deleteUserReview}>
+          Delete review
+        </button>
       </div>
     </div>
   );

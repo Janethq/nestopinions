@@ -4,6 +4,8 @@ const User = require("../../models/user");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { getUser } = require("../../config/verifyToken");
+const Property = require("../../models/property");
+const Review = require("../../models/reviewModel");
 
 // testing to ensure endpoint is working
 const test = (req, res) => {
@@ -141,6 +143,47 @@ const fetchUserReviews = async (req, res) => {
   }
 };
 
+// dashboard MyReviewsTab
+const deleteMyReview = async (req, res) => {
+  try {
+    const reviewId = req.params.reviewId; // Assuming reviewId is passed as a route parameter
+    const userId = res.locals.user._id; //based on storeUser in verifyToken
+
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ error: "User not found." });
+    }
+
+    // Find the review to be deleted
+    const review = await Review.findById(reviewId);
+    if (!review) {
+      return res.status(404).json({ error: "Review not found" });
+    }
+
+    // Delete the review using mongoose method
+    await review.deleteOne();
+
+    // since reviews are also embedded in properties & user --> need to remove ($pull in mongoose)
+
+    // Update the User model - remove the review from reviewsPosted
+    await User.findOneAndUpdate(
+      { _id: review.reviewer },
+      { $pull: { reviewsPosted: reviewId } }
+    );
+
+    // Update the Property model - remove the review from reviews
+    await Property.findOneAndUpdate(
+      { _id: review.propertyId },
+      { $pull: { reviews: reviewId } }
+    );
+
+    res.status(200).json({ message: "Review deleted successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Server error" });
+  }
+};
+
 module.exports = {
   test,
   registerUser,
@@ -148,4 +191,5 @@ module.exports = {
   checkToken,
   updatePassword,
   fetchUserReviews,
+  deleteMyReview,
 };

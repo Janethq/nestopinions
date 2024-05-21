@@ -7,6 +7,7 @@ const {
   checkToken,
   updatePassword,
   fetchUserReviews,
+  deleteMyReview,
 } = require("../../controllers/api/authController");
 const { verifyJWT } = require("../../config/verifyToken");
 
@@ -19,5 +20,6 @@ router.get("/check-token", verifyJWT, checkToken);
 router.post("/update-password", verifyJWT, updatePassword);
 
 router.get("/my-reviews", verifyJWT, fetchUserReviews);
+router.delete("/my-reviews/:reviewId", verifyJWT, deleteMyReview);
 
 module.exports = router;
