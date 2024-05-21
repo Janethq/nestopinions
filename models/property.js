@@ -2,6 +2,37 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
+// Define the review schema
+const reviewSchema = new Schema(
+  {
+    time: {
+      type: String,
+      required: true,
+      enum: ["Morning", "Afternoon", "Evening", "Night"],
+    },
+    rating: {
+      type: Number,
+      required: true,
+      min: 1,
+      max: 5,
+    },
+    looksNew: {
+      type: Boolean,
+      required: true,
+    },
+    pros: {
+      type: String,
+      required: true,
+    },
+    cons: {
+      type: String,
+      required: true,
+    },
+    reviewer: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+  },
+  { timestamps: true }
+);
+
 const propertySchema = new Schema(
   {
     address: {
@@ -12,7 +43,7 @@ const propertySchema = new Schema(
     postalCode: {
       type: Number,
       required: true,
-      minlength: [6, "Postal code must be exactly 6 digits"], //provide custom validation message for developers, omitting msg will end up with ugly default msg
+      minlength: [6, "Postal code must be exactly 6 digits"],
       maxlength: [6, "Postal code must be exactly 6 digits"],
     },
     area: {
@@ -35,6 +66,7 @@ const propertySchema = new Schema(
       type: String,
       required: true,
     },
+    reviews: [reviewSchema], // Embed the review schema
   },
   {
     timestamps: true,
