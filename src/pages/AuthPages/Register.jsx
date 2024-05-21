@@ -34,14 +34,21 @@ export default function Register() {
       } else {
         setAuthUser(user); //update state with new user
         toast.success("Registration successful!");
-        navigate(`/dashboard`);
+        // navigate(`/dashboard`); //redundant line
 
         //enabling property--> add review --> login --> register --> add review OR dashboard
         const from = sessionStorage.getItem("from"); //get stored destination
+        const addressWithPostal = sessionStorage.getItem("addressWithPostal"); // get stored property details
 
         if (from && from.includes("reviews")) {
           sessionStorage.removeItem("from"); // clear stored destination after retrieval
-          navigate(`${from}/new`); // redirect to the intended destination
+          sessionStorage.removeItem("addressWithPostal"); // clear stored property details after retrieval
+          // navigate(`${from}/new`); // redirect to the intended destination
+          navigate(`${from}/new`, {
+            state: {
+              addressWithPostal: JSON.parse(addressWithPostal),
+            },
+          }); // redirect to the intended destination with property details
         } else {
           navigate(`/dashboard`);
         }

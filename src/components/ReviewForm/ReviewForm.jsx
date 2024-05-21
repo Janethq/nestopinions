@@ -1,14 +1,28 @@
 import "tailwindcss/tailwind.css";
-import { useNavigate, useParams } from "react-router-dom";
-import { useContext, useState } from "react";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 
 function ReviewForm() {
   const { id } = useParams(); //id === propertyId
   const { authUser } = useContext(AuthContext);
   const [errorMsg, setErrorMsg] = useState("");
-
   const navigate = useNavigate();
+
+  const location = useLocation();
+  const [addressWithPostal, setAddressWithPostal] = useState(
+    location.state?.addressWithPostal
+  ); //getting the property details to use
+
+  useEffect(() => {
+    if (!addressWithPostal) {
+      const storedAddressWithPostal =
+        sessionStorage.getItem("addressWithPostal");
+      if (storedAddressWithPostal) {
+        setAddressWithPostal(JSON.parse(storedAddressWithPostal));
+      }
+    }
+  }, [addressWithPostal]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -57,6 +71,18 @@ function ReviewForm() {
     <>
       <div className="bg-white p-8 rounded-lg shadow-md">
         <h1 className="text-2xl font-bold mb-4">Review Form</h1>
+
+        {addressWithPostal && (
+          <div className="mb-4">
+            <h2 className="text-xl font-semibold">
+              Property: {addressWithPostal.address}
+            </h2>
+            <h3 className="text-lg">
+              Postal Code: {addressWithPostal.postalCode}
+            </h3>
+          </div>
+        )}
+
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="flex flex-col">
             <label htmlFor="time-of-visit" className="text-gray-700">
