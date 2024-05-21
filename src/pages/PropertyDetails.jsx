@@ -39,22 +39,12 @@ export default function PropertyDetails() {
   };
 
   const handleAddReview = () => {
-    const addressWithPostal = {
-      address: propertyDetails.address,
-      postalCode: propertyDetails.postalCode,
-    };
     if (authUser) {
-      navigate(`/property/${id}/reviews/new`, {
-        state: { addressWithPostal: addressWithPostal },
-      });
+      navigate(`/property/${id}/reviews/new`);
     } else {
       const from = `/property/${id}/reviews`;
       sessionStorage.setItem("from", from); // storing the intended destination in session storage to redirect
-      sessionStorage.setItem(
-        "addressWithPostal",
-        JSON.stringify(addressWithPostal)
-      ); // storing property details to pass thru redirect
-      navigate("/login", { state: { from, addressWithPostal } }); //pass the from state to login
+      navigate("/login", { state: { from } }); //pass the from state to login
     }
   };
 
