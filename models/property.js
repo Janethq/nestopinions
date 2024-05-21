@@ -12,6 +12,8 @@ const propertySchema = new Schema(
     postalCode: {
       type: Number,
       required: true,
+      minlength: [6, "Postal code must be exactly 6 digits"], //provide custom validation message for developers, omitting msg will end up with ugly default msg
+      maxlength: [6, "Postal code must be exactly 6 digits"],
     },
     area: {
       type: String,
