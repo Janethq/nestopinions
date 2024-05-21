@@ -1,12 +1,14 @@
 # NestOpinion
-
+A property review app with reviews by your fellow home searchers!
 
 ## Description / User Story
+As a home searcher, I want to read honest home listings because the current propery apps available are only written up by property agents who try to paint a more rosy picture due to their own interests which might not be as aligned with the home searcher. On the contrary, fellow home searchers all have the same goals - to find the perfect home according to their needs.
 
+Everyone has different requirements and opinions to what constitutes a perfect home and so as a user, they would want to be able to filter through relevant search queries while looking for their house.
 
-## Getting Started
+As some things are quite subjective when it comes to housing opinions, it would be beneficial to look at the house from different perspectives of your fellow home searchers and see if there are other things that you have failed to consider but actually found it quite critical in your search for the perfect home.
 
-## Planning
+## Getting Started- Planning
 
 ### Project Time Frame
 1.5 weeks
@@ -28,7 +30,10 @@ Try it here: (https://nestopinion.onrender.com/)
 
 ## JANE
 
-### Screenshots
+### Screenshots of
+The review form
+
+The reviews
 
 ### Favourite React Component
 
