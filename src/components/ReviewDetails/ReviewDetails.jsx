@@ -86,7 +86,7 @@ const handleLooksOld = () => {
   const displayReviews = () => {
     if (reviewData.length > 0) {
       return reviewData.map((review, index) => (
-        <div key={index}>
+        <div key={index} className="bg-gray-200 p-4 m-2 rounded">
           <div>
             <label>User: </label>
             <span>UserName Goes Here</span>
@@ -125,30 +125,71 @@ const handleLooksOld = () => {
 
   return (
     <>
-      <h1>Review Details</h1>
-      <div>
-        <button onClick={handleHighRating}>Highest Rating</button>
-      </div>
-      <div>
-        <button onClick={handleLowRating}>Lowest Rating</button>
-      </div>
-      <div>
-        <button onClick={handleMorningTime}>Morning Visits</button>
-      </div>
-      <div>
-        <button onClick={handleAfternoonTime}>Afternoon Visits</button>
-      </div>
-      <div>
-        <button onClick={handleEveningTime}>Evening Visits</button>
-      </div>
-      <div>
-        <button onClick={handleNightTime}>Night Visits</button>
-      </div>
-      <div>
-        <button onClick={handleLooksNew}>LooksNew</button>
-      </div>
-      <div>
-        <button onClick={handleLooksOld}>LooksOld</button>
+      <div className="flex space-x-2">
+        <div>
+          <button
+            onClick={handleHighRating}
+            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 focus:outline-none"
+          >
+            Highest Rating
+          </button>
+        </div>
+        <div>
+          <button
+            onClick={handleLowRating}
+            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 focus:outline-none"
+          >
+            Lowest Rating
+          </button>
+        </div>
+        <div>
+          <button
+            onClick={handleMorningTime}
+            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 focus:outline-none"
+          >
+            Morning Visits
+          </button>
+        </div>
+        <div>
+          <button
+            onClick={handleAfternoonTime}
+            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 focus:outline-none"
+          >
+            Afternoon Visits
+          </button>
+        </div>
+        <div>
+          <button
+            onClick={handleEveningTime}
+            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 focus:outline-none"
+          >
+            Evening Visits
+          </button>
+        </div>
+        <div>
+          <button
+            onClick={handleNightTime}
+            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 focus:outline-none"
+          >
+            Night Visits
+          </button>
+        </div>
+        <div>
+          <button
+            onClick={handleLooksNew}
+            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 focus:outline-none"
+          >
+            LooksNew
+          </button>
+        </div>
+        <div>
+          <button
+            onClick={handleLooksOld}
+            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 focus:outline-none"
+          >
+            LooksOld
+          </button>
+        </div>
       </div>
       {displayReviews()}
     </>
