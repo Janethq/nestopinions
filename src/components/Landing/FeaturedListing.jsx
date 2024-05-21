@@ -50,6 +50,35 @@ function FeaturedListing() {
               >
                 View Details
               </Link>
+              <div className="mt-4">
+                <h3 className="text-lg font-semibold">Reviews:</h3>
+                {property.reviews && property.reviews.length > 0 ? (
+                  <ul className="mt-2">
+                    {property.reviews.map((review, index) => (
+                      <li key={index} className="mb-2">
+                        <p className="text-gray-700">
+                          <strong>Time:</strong> {review.time}
+                        </p>
+                        <p className="text-gray-700">
+                          <strong>Rating:</strong> {review.rating}
+                        </p>
+                        <p className="text-gray-700">
+                          <strong>Looks New:</strong>{" "}
+                          {review.looksNew ? "Yes" : "No"}
+                        </p>
+                        <p className="text-gray-700">
+                          <strong>Pros:</strong> {review.pros}
+                        </p>
+                        <p className="text-gray-700">
+                          <strong>Cons:</strong> {review.cons}
+                        </p>
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p className="text-gray-700">No reviews yet.</p>
+                )}
+              </div>
             </div>
           </div>
         ))}
