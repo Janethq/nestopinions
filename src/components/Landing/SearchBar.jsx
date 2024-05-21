@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 function SearchBar() {
   const [area, setArea] = useState("");
@@ -8,6 +9,13 @@ function SearchBar() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Validate postal code if provided
+    if (postalCode && postalCode.length !== 6) {
+      alert("Postal code must be exactly 6 digits.");
+      return;
+    }
+
     try {
       const response = await fetch(
         `/api/properties/search?area=${area}&hdbType=${hdbType}&postalCode=${postalCode}`
@@ -19,6 +27,14 @@ function SearchBar() {
       setSearchResults(data);
     } catch (error) {
       console.error("Error occurred while searching:", error);
+    }
+  };
+
+  const handlePostalCodeChange = (e) => {
+    const value = e.target.value;
+    // Allow only numeric values and limit to 6 digits
+    if (/^\d{0,6}$/.test(value)) {
+      setPostalCode(value);
     }
   };
 
@@ -36,6 +52,10 @@ function SearchBar() {
           <option value="Pasir Ris">Pasir Ris</option>
           <option value="Serangoon">Serangoon</option>
           <option value="Tampines">Tampines</option>
+          <option value="Bedok">Bedok</option>
+          <option value="Clementi">Clementi</option>
+          <option value="Punggol">Punggol</option>
+          <option value="Jurong East">Jurong East</option>
         </select>
 
         <label htmlFor="hdbType">HDB Type:</label>
@@ -57,7 +77,7 @@ function SearchBar() {
           id="postalCode"
           name="postalCode"
           value={postalCode}
-          onChange={(e) => setPostalCode(e.target.value)}
+          onChange={handlePostalCodeChange}
         />
 
         <button type="submit">Search</button>
@@ -68,7 +88,23 @@ function SearchBar() {
         <ul>
           {searchResults.map((property) => (
             <li key={property._id}>
-              {property.address}, {property.area}, {property.hdbType}
+              <div>
+                <img
+                  src={property.imageUrl}
+                  alt={`Image of ${property.address}`}
+                  style={{ width: "200px", height: "auto" }}
+                />
+                <p>
+                  {property.address}, {property.area}, {property.postalCode},{" "}
+                  {property.hdbType}, {property.distanceMrt}
+                </p>
+                <Link
+                  to={`/property/${property._id}`}
+                  className="inline-block mt-4 px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-700"
+                >
+                  View Details
+                </Link>
+              </div>
             </li>
           ))}
         </ul>
