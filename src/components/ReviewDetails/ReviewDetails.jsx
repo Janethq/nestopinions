@@ -88,10 +88,6 @@ const handleLooksOld = () => {
       return reviewData.map((review, index) => (
         <div key={index} className="bg-gray-200 p-4 m-2 rounded">
           <div>
-            <label>User: </label>
-            <span>UserName Goes Here</span>
-          </div>
-          <div>
             <label>Time Of Visit: </label>
             <span>{review.time}</span>
           </div>
@@ -112,9 +108,7 @@ const handleLooksOld = () => {
             <span>{review.cons}</span>
           </div>
           <div>
-            <button onClick={() => handleRemove(review._id)}>
-              Remove Review
-            </button>
+            <button onClick={() => handleRemove(review._id)}>❌ Remove</button>
           </div>
         </div>
       ));

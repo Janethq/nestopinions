@@ -32,16 +32,6 @@ const create = async (req, res) => {
   }
 };
 
-// const create = async (req, res) => {
-//   try {
-//     const review = await Review.create(req.body);
-//     res.status(200).json(review);
-//   } catch (error) {
-//     console.log(error.message);
-//     res.status(500).json({ message: error.message });
-//   }
-// };
-
 const index = async (req, res) => {
   const reviews = await Review.find({});
   res.json(reviews);
@@ -68,7 +58,9 @@ const getOne = async (req, res) => {
   try {
     const reviews = await Review.find({
       propertyId: id,
-    });
+    })
+      .populate("reviewer")
+      .exec();
     console.log("this is reviews");
     console.log(reviews);
     res.json(reviews);
