@@ -121,7 +121,16 @@ const updatePassword = async (req, res) => {
 const fetchUserReviews = async (req, res) => {
   try {
     const userId = res.locals.user._id; //based on storeUser in verifyToken
-    const user = await User.findById(userId).populate("reviewsPosted");
+    // const user = await User.findById(userId).populate("reviewsPosted");
+
+    const user = await User.findById(userId).populate({
+      path: "reviewsPosted",
+      populate: {
+        path: "propertyId",
+        model: "Property",
+      },
+    }); //populaing via the referenced propertyId
+
     if (!user) {
       return res.status(404).json({ error: "User not found." });
     }

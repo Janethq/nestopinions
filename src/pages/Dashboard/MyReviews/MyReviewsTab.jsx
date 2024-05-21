@@ -6,7 +6,6 @@ const log = debug("mern:Dashboard:MyReviews");
 
 const MyReviewsTab = () => {
   const { authUser } = useContext(AuthContext);
-  // eslint-disable-next-line no-unused-vars
   const [authUserReviews, setAuthUserReviews] = useState([]);
 
   useEffect(() => {
@@ -34,7 +33,9 @@ const MyReviewsTab = () => {
 
     fetchUserReviews();
   }, [authUser]);
+
   log(authUserReviews); //fetching takes time
+
   return (
     <div className="pt-4">
       <h1 className="py-2 text-2xl font-semibold text-gray-900">
@@ -47,13 +48,40 @@ const MyReviewsTab = () => {
               key={review._id}
               className="bg-white p-4 rounded-md shadow-md mb-4"
             >
-              <p className="text-lg font-semibold">{review.pros}</p>
-              <p className="text-gray-700">{review.cons}</p>
-              <p className="text-sm text-gray-500">{review.time}</p>
+              <div className="flex items-center">
+                <img
+                  src={review.propertyId.imageUrl}
+                  alt={review.propertyId.address}
+                  className="w-16 h-16 object-cover rounded mr-4"
+                />
+                <div>
+                  <p className="text-lg font-semibold">
+                    {review.propertyId.address}
+                  </p>
+                  <p className="text-gray-700">
+                    {review.propertyId.postalCode}
+                  </p>
+                </div>
+              </div>
+              <div className="mt-2">
+                <p className="flex items-center text-sm text-gray-500">
+                  <span className="mr-2">Visited property in the:</span>
+                  <span className="mr-2">
+                    <b>{review.time}</b>
+                  </span>
+                </p>
+                <p className="text-sm text-gray-500 flex items-center">
+                  <span className="mr-2">Rating: {review.rating}</span>
+                </p>
+                <button className="text-indigo-500 mt-2">Read more</button>
+                <button className="text-red-500 ml-4 mt-2">
+                  Delete review
+                </button>
+              </div>
             </div>
           ))
         ) : (
-          <p className="text-gray-600">No reviews posted yet.</p>
+          <p className="text-gray-600">You have yet to post any reviews.</p>
         )}
       </div>
     </div>
