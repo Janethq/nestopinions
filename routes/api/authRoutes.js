@@ -6,6 +6,7 @@ const {
   loginUser,
   checkToken,
   updatePassword,
+  fetchUserReviews,
 } = require("../../controllers/api/authController");
 const { verifyJWT } = require("../../config/verifyToken");
 
@@ -16,5 +17,7 @@ router.post("/login", loginUser);
 router.get("/check-token", verifyJWT, checkToken);
 
 router.post("/update-password", verifyJWT, updatePassword);
+
+router.get("/my-reviews", verifyJWT, fetchUserReviews);
 
 module.exports = router;
