@@ -20,7 +20,7 @@ export default function NavBar() {
       <div className="flex items-center space-x-4">
         <img
           className="h-8 w-auto"
-          src="public/images/logo/icons8-real-estate-96.png"
+          src="images/logo/icons8-real-estate-96.png" //Files in the public directory are served at the root path.
           alt="NestOpinion Logo"
         />
         <NavLink to="/" className="text-xl font-bold text-gray-900">
