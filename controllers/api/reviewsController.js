@@ -1,10 +1,15 @@
 const Review = require("../../models/reviewModel");
 const User = require("../../models/user");
+const debug = require("debug")("mern:controllers:reviewsController");
 
 const create = async (req, res) => {
   try {
-    const { propertyId, time, rating, looksNew, pros, cons, reviewer } =
-      req.body;
+    const { propertyId, time, rating, looksNew, pros, cons } = req.body;
+    const reviewer = res.locals.user._id; //getting from auth user as per the storeUser in verifyToken
+    debug("reviewer ", res.locals.user);
+    if (!reviewer) {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
 
     // Create new review
     const newReview = new Review({

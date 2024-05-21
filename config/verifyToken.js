@@ -22,6 +22,7 @@ const verifyJWT = (req, res, next) => {
   try {
     const payload = jwt.verify(token, process.env.SECRET);
     storeUser(req, res, payload.user);
+    console.log("User from token:", res.locals.user); // trying to debug
     next();
   } catch (error) {
     storeUser(req, res, null);

@@ -7,7 +7,6 @@ function ReviewForm() {
   const { id } = useParams(); //id === propertyId
   const { authUser } = useContext(AuthContext);
   const [errorMsg, setErrorMsg] = useState("");
-
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -34,10 +33,12 @@ function ReviewForm() {
     // Send a POST request to the new route with the form data
     //http://localhost:5173/addreview
     try {
+      const token = localStorage.getItem("token"); // retrieve token from local storage
       const res = await fetch(`/api/reviews/property/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`, // using token to ensure auth
         },
         body: JSON.stringify(formObj),
       });

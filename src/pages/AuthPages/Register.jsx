@@ -34,11 +34,11 @@ export default function Register() {
       } else {
         setAuthUser(user); //update state with new user
         toast.success("Registration successful!");
-        navigate(`/dashboard`);
+        // navigate(`/dashboard`); //redundant line
 
         //enabling property--> add review --> login --> register --> add review OR dashboard
         const from = sessionStorage.getItem("from"); //get stored destination
-
+        
         if (from && from.includes("reviews")) {
           sessionStorage.removeItem("from"); // clear stored destination after retrieval
           navigate(`${from}/new`); // redirect to the intended destination
