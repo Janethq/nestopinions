@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
-// Define the review schema
 const reviewSchema = new Schema(
   {
     time: {
@@ -72,11 +71,5 @@ const propertySchema = new Schema(
     timestamps: true,
   }
 );
-
-propertySchema.virtual("reviews", {
-  ref: "Review",
-  localField: "_id",
-  foreignField: "propertyId",
-});
 
 module.exports = mongoose.model("Property", propertySchema);
