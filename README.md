@@ -13,24 +13,24 @@ As some things are quite subjective when it comes to housing opinions, it would 
 ## Getting Started- Planning
 
 ### Project Time Frame
-
-1.5 weeks
+2 weeks
 
 ### Trello
 
 [Trello Board](https://trello.com/b/nMGA0Eyq/ga-sei-project-3)
+<img src="screenshots/trello.png">
 
-### WireFrame in [Figma](https://www.figma.com/board/tnVfWKHcX4gzCulPPkbyaR/Project-3?node-id=0%3A1&t=IE89gLKHWpSDTkl7-1)
+### WireFrame in [Figma](https://www.figma.com/board/tnVfWKHcX4gzCulPPkbyaR/Project-3?node-id=0%3A1&t=IE89gLKHWpSDTkl7-1) 
+<img src="screenshots/wireframe.png">
 
 ### Example Schema
 
 [Google Sheets](https://docs.google.com/spreadsheets/d/1En5AYS5Jb8o0fZvBJPKw_9DJl8ueUhnMdwmN__04wTc/edit?usp=sharing)
+<img src="screenshots/exampleSchema.png">
 
 ### Deployed on Render
 
 Try it here: (https://nestopinion.onrender.com/)
-
----
 
 ## MERYL
 
@@ -64,32 +64,56 @@ A property can have many reviews, which is a one-to-many relationship. Embedding
 
 Working on this project as a team requires clear communication and effective project management. I am grateful that my team is very efficient in setting direction and goals for the project. For me, documenting the process has been a huge part of this project. Spending time planning my schedule, estimating and visualizing what I can complete, strategizing on how to tackle errors, and setting mini to-do lists the day before helps me manage myself and ensure good overall team progression.
 
-## VANITA
 
-## JANE
+## [VANITA](https://github.com/vanitaar)
 
-### Screenshots of
 
-The review form
+## [JANE](https://github.com/Janethq)
 
-The reviews
+### Screenshots
+
+- The review form
+<img src="screenshots/reviewForm.png">
+
+- The reviews
 
 ### Favourite React Component
 
+<img src="screenshots/reviewDetailsComponent.png">
+
 ### Routing Component
+<img src="screenshots/routing.png">
 
 ### CRUD
+- create
+<img src="screenshots/create.png">
+
+- read
+<img src="screenshots/read.png">
+
+- remove
+<img src="screenshots/delete.png">
 
 ### Referencing
+- Mongoose Model
+<img src="screenshots/referencingmodel.png">
+
+- Model's View
+<img src="screenshots/referencingreviewform.png">
 
 ### Biggest Challenge
-
-<img src=""/>
+- referencing propertyID to each individual review
 
 ### Key Takeaways
-
----
+- Learnt how to navigate monorepo
+- Got more familiar with security concerns while creating an app
 
 ### Technologies Used
+-
+-
 
 ### Next Steps
+-
+-
+
+### QnA + Feedback
