@@ -27,11 +27,13 @@ As some things are quite subjective when it comes to housing opinions, it would 
 ### Deployed on Render
 Try it here: (https://nestopinion.onrender.com/)
 
-## MERYL
+## [MERYL](https://github.com/Merylcheng)
 
-## VANITA
 
-## JANE
+## [VANITA](https://github.com/vanitaar)
+
+
+## [JANE](https://github.com/Janethq)
 
 ### Screenshots of
 - The review form
