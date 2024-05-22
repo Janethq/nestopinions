@@ -3,9 +3,9 @@ import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import toast from "react-hot-toast";
 import { isTokenExpired, removeToken } from "../utils/services/clientToken";
-import debug from "debug";
+// import debug from "debug";
 
-const log = debug("mern:ProtectedRoutes");
+// const log = debug("mern:ProtectedRoutes");
 
 const ProtectedRoute = ({ children }) => {
   const { authUser, setAuthUser } = useContext(AuthContext);
@@ -34,7 +34,7 @@ const ProtectedRoute = ({ children }) => {
     checkTokenExpiration();
 
     const interval = setInterval(checkTokenExpiration, 5000);
-    log(interval);
+    // log(interval);
     //clean up
     return () => clearInterval(interval);
   }, [navigate, setAuthUser]);
