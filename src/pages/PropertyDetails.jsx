@@ -66,7 +66,14 @@ export default function PropertyDetails() {
       )}
       <br />
       {/* <NavLink to={`/property/${id}/addReview`}>Add Review</NavLink> */}
-      <button onClick={handleAddReview}>Add Review</button>
+      <button
+        onClick={handleAddReview}
+        className="bg-indigo-500 text-white px-4 py-2 rounded hover:bg-indigo-700 focus:outline-none"
+      >
+        Add Review
+      </button>
+      <br />
+      <br />
       <ReviewDetails propertyId={id} />
       <button onClick={handleShare}>Share</button>
     </div>

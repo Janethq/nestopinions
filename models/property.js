@@ -2,6 +2,8 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
+const reviewSchema = require("./reviewModel").schema;
+
 const propertySchema = new Schema(
   {
     address: {
@@ -35,7 +37,7 @@ const propertySchema = new Schema(
       type: String,
       required: true,
     },
-    reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: "Review" }], // Embed review IDs
+    reviews: [reviewSchema], // Embed review IDs
   },
   {
     timestamps: true,

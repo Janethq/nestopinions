@@ -3,6 +3,9 @@ import { useState, useEffect } from "react";
 
 export default function ReviewDetails({ propertyId }) {
   const [reviewData, setReviewData] = useState([]);
+  const [activeRatingButton, setActiveRatingButton] = useState(null);
+  const [activeTimeButton, setActiveTimeButton] = useState(null);
+  const [activeLooksNewButton, setactiveLooksNewButton] = useState(null);
 
   const fetchData = async () => {
     try {
@@ -34,12 +37,14 @@ export default function ReviewDetails({ propertyId }) {
     //create new array and re-render
     const sortHighest = [...reviewData].sort((a, b) => b.rating - a.rating);
     setReviewData(sortHighest);
+    setActiveRatingButton("highRating");
   };
 
   const handleLowRating = () => {
     //create new array and re-render
     const sortHighest = [...reviewData].sort((a, b) => a.rating - b.rating);
     setReviewData(sortHighest);
+    setActiveRatingButton("lowRating");
   };
 
   //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter
@@ -49,6 +54,7 @@ export default function ReviewDetails({ propertyId }) {
     );
     console.log(morningReviews);
     setReviewData(morningReviews);
+    setActiveTimeButton("mornings");
   };
 
   const handleAfternoonTime = () => {
@@ -57,6 +63,7 @@ export default function ReviewDetails({ propertyId }) {
     );
     console.log(afternoonReviews);
     setReviewData(afternoonReviews);
+    setActiveTimeButton("afternoons");
   };
 
   const handleEveningTime = () => {
@@ -65,28 +72,32 @@ export default function ReviewDetails({ propertyId }) {
     );
     console.log(eveningReviews);
     setReviewData(eveningReviews);
+    setActiveTimeButton("evenings");
   };
 
   const handleNightTime = () => {
     const nightReviews = reviewData.filter((review) => review.time === "Night");
     console.log(nightReviews);
     setReviewData(nightReviews);
+    setActiveTimeButton("nights");
   };
 
-const handleLooksNew = () => {
-  const filteredReviews = reviewData.filter((review) => review.looksNew);
-  setReviewData(filteredReviews);
-};
+  const handleLooksNew = () => {
+    const filteredReviews = reviewData.filter((review) => review.looksNew);
+    setReviewData(filteredReviews);
+    setactiveLooksNewButton("new");
+  };
 
-const handleLooksOld = () => {
-  const filteredReviews = reviewData.filter((review) => !review.looksNew);
-  setReviewData(filteredReviews);
-};
+  const handleLooksOld = () => {
+    const filteredReviews = reviewData.filter((review) => !review.looksNew);
+    setReviewData(filteredReviews);
+    setactiveLooksNewButton("old");
+  };
 
   const displayReviews = () => {
     if (reviewData.length > 0) {
       return reviewData.map((review, index) => (
-        <div key={index} className="bg-gray-200 p-4 m-2 rounded">
+        <div key={index} className="bg-gray-200 p-4 m-2 relative rounded">
           <div>
             <label>Time Of Visit: </label>
             <span>{review.time}</span>
@@ -96,8 +107,8 @@ const handleLooksOld = () => {
             <span>{review.rating}</span>
           </div>
           <div>
-            <label>Looks New?: </label>
-            <span>{review.looksNew ? "Yes" : "No"}</span>
+            <label></label>
+            <span>{review.looksNew ? "Looks New" : "Looks Old"}</span>
           </div>
           <div>
             <label>Pros: </label>
@@ -108,12 +119,17 @@ const handleLooksOld = () => {
             <span>{review.cons}</span>
           </div>
           <div>
-            <button onClick={() => handleRemove(review._id)}>❌ Remove</button>
+            <button
+              onClick={() => handleRemove(review._id)}
+              className="absolute top-5 right-5"
+            >
+              ❌ 
+            </button>
           </div>
         </div>
       ));
     } else {
-      return <div>No reviews posted yet.</div>;
+      return <div className="text-gray-400">No reviews posted yet.</div>;
     }
   };
 
@@ -123,7 +139,9 @@ const handleLooksOld = () => {
         <div>
           <button
             onClick={handleHighRating}
-            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 focus:outline-none"
+            className={`bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 focus:outline-none ${
+              activeRatingButton === "highRating" ? "bg-red-300" : ""
+            }`}
           >
             Highest Rating
           </button>
@@ -131,7 +149,9 @@ const handleLooksOld = () => {
         <div>
           <button
             onClick={handleLowRating}
-            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 focus:outline-none"
+            className={`bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 focus:outline-none ${
+              activeRatingButton === "lowRating" ? "bg-red-300" : ""
+            }`}
           >
             Lowest Rating
           </button>
@@ -139,7 +159,9 @@ const handleLooksOld = () => {
         <div>
           <button
             onClick={handleMorningTime}
-            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 focus:outline-none"
+            className={`bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 focus:outline-none ${
+              activeTimeButton === "mornings" ? "bg-red-300" : ""
+            }`}
           >
             Morning Visits
           </button>
@@ -147,7 +169,9 @@ const handleLooksOld = () => {
         <div>
           <button
             onClick={handleAfternoonTime}
-            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 focus:outline-none"
+            className={`bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 focus:outline-none ${
+              activeTimeButton === "afternoons" ? "bg-red-300" : ""
+            }`}
           >
             Afternoon Visits
           </button>
@@ -155,7 +179,9 @@ const handleLooksOld = () => {
         <div>
           <button
             onClick={handleEveningTime}
-            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 focus:outline-none"
+            className={`bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 focus:outline-none ${
+              activeTimeButton === "evenings" ? "bg-red-300" : ""
+            }`}
           >
             Evening Visits
           </button>
@@ -163,7 +189,9 @@ const handleLooksOld = () => {
         <div>
           <button
             onClick={handleNightTime}
-            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 focus:outline-none"
+            className={`bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 focus:outline-none ${
+              activeTimeButton === "nights" ? "bg-red-300" : ""
+            }`}
           >
             Night Visits
           </button>
@@ -171,7 +199,9 @@ const handleLooksOld = () => {
         <div>
           <button
             onClick={handleLooksNew}
-            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 focus:outline-none"
+            className={`bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 focus:outline-none ${
+              activeLooksNewButton === "new" ? "bg-red-300" : ""
+            }`}
           >
             Looks New
           </button>
@@ -179,7 +209,9 @@ const handleLooksOld = () => {
         <div>
           <button
             onClick={handleLooksOld}
-            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 focus:outline-none"
+            className={`bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 focus:outline-none ${
+              activeLooksNewButton === "old" ? "bg-red-300" : ""
+            }`}
           >
             Looks Old
           </button>
