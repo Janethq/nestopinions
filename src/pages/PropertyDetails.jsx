@@ -53,17 +53,40 @@ export default function PropertyDetails() {
   }
   console.log(propertyDetails.imageUrl);
   return (
-    <div>
-      <h2>Property Details</h2>
-      <p>Address: {propertyDetails.address}</p>
-      <p>Area: {propertyDetails.area}</p>
-      <p>Postal Code: {propertyDetails.postalCode}</p>
-      <p>HDB Type: {propertyDetails.hdbType}</p>
-      {propertyDetails.imageUrl ? (
-        <img src={propertyDetails.imageUrl} alt="Property" />
-      ) : (
-        <p>No image available</p>
-      )}
+    <div className="container mx-auto px-4 py-8">
+      <h2 className="text-2xl font-bold mb-4">Property Details</h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="bg-white rounded-lg shadow-md p-6">
+          <p>
+            <span className="font-semibold">Address:</span>{" "}
+            {propertyDetails.address}
+          </p>
+          <p>
+            <span className="font-semibold">Area:</span> {propertyDetails.area}
+          </p>
+          <p>
+            <span className="font-semibold">Postal Code:</span>{" "}
+            {propertyDetails.postalCode}
+          </p>
+          <p>
+            <span className="font-semibold">HDB Type:</span>{" "}
+            {propertyDetails.hdbType}
+          </p>
+          <p>
+            <span className="font-semibold">Distance to MRT:</span>{" "}
+            {propertyDetails.distanceMrt}
+          </p>
+        </div>
+        <div>
+          {propertyDetails.imageUrl && (
+            <img
+              src={propertyDetails.imageUrl}
+              alt="Property"
+              className="rounded-lg shadow-md"
+            />
+          )}
+        </div>
+      </div>
       <br />
       {/* <NavLink to={`/property/${id}/addReview`}>Add Review</NavLink> */}
       <button
