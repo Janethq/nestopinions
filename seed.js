@@ -4,6 +4,7 @@ const { faker } = require("@faker-js/faker");
 
 const User = require("./models/user");
 const Property = require("./models/property");
+const Review = require("./models/reviewModel");
 
 const seedUsers = [
   {
@@ -60,15 +61,6 @@ const seedProerties = [
     hdbType: "4-room",
     imageUrl:
       "https://ohmyhome.com/wp-content/uploads/2021/08/IMG_8871-2-scaled.jpg",
-    reviews: [
-      {
-        time: "Morning",
-        rating: 4,
-        looksNew: true,
-        pros: "Good Location",
-        cons: "Construction nearby",
-      },
-    ],
   },
   {
     address: "303 Jurong East Street 21",
@@ -140,6 +132,7 @@ const sowTheSeedInDb = async () => {
   await User.create(seedUsers);
   await Property.deleteMany({});
   await Property.create(seedProerties);
+  await Review.deleteMany({});
 };
 
 sowTheSeedInDb(); //open new termainal // run command: node seed.js // check by refreshing db in compass
