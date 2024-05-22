@@ -1,13 +1,14 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../context/AuthContext";
+import MyReviewCard from "./MyReviewCard";
 import debug from "debug";
 
 const log = debug("mern:Dashboard:MyReviews");
 
 const MyReviewsTab = () => {
   const { authUser } = useContext(AuthContext);
-  // eslint-disable-next-line no-unused-vars
   const [authUserReviews, setAuthUserReviews] = useState([]);
+  const [expandedReviewIds, setExpandedReviewIds] = useState(new Set()); // to toggleReadMore
 
   useEffect(() => {
     const fetchUserReviews = async () => {
@@ -34,7 +35,28 @@ const MyReviewsTab = () => {
 
     fetchUserReviews();
   }, [authUser]);
-  log(authUserReviews); //fetching takes time
+
+  log(authUserReviews);
+
+  const toggleReadMore = (reviewId) => {
+    setExpandedReviewIds((prevIds) => {
+      const newIds = new Set(prevIds);
+      if (newIds.has(reviewId)) {
+        newIds.delete(reviewId);
+      } else {
+        newIds.add(reviewId);
+      }
+      return newIds;
+    });
+  };
+
+  //updating state
+  const myReviewToRemove = (reviewId) => {
+    setAuthUserReviews((prevReviews) =>
+      prevReviews.filter((review) => review._id !== reviewId)
+    );
+  };
+
   return (
     <div className="pt-4">
       <h1 className="py-2 text-2xl font-semibold text-gray-900">
@@ -43,17 +65,16 @@ const MyReviewsTab = () => {
       <div>
         {authUserReviews.length > 0 ? (
           authUserReviews.map((review) => (
-            <div
+            <MyReviewCard
               key={review._id}
-              className="bg-white p-4 rounded-md shadow-md mb-4"
-            >
-              <p className="text-lg font-semibold">{review.pros}</p>
-              <p className="text-gray-700">{review.cons}</p>
-              <p className="text-sm text-gray-500">{review.time}</p>
-            </div>
+              review={review}
+              toggleReadMore={toggleReadMore}
+              expandedReviewIds={expandedReviewIds}
+              myReviewToRemove={myReviewToRemove}
+            />
           ))
         ) : (
-          <p className="text-gray-600">No reviews posted yet.</p>
+          <p className="text-gray-600">You have yet to post any reviews.</p>
         )}
       </div>
     </div>

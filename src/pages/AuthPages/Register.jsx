@@ -38,7 +38,7 @@ export default function Register() {
 
         //enabling property--> add review --> login --> register --> add review OR dashboard
         const from = sessionStorage.getItem("from"); //get stored destination
-        
+
         if (from && from.includes("reviews")) {
           sessionStorage.removeItem("from"); // clear stored destination after retrieval
           navigate(`${from}/new`); // redirect to the intended destination
@@ -66,7 +66,6 @@ export default function Register() {
           <img
             className="mx-auto h-10 w-auto"
             src="public/images/logo/icons8-real-estate-96.png"
-            alt="NestOpinion Logo"
           />
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
             Become a NestOpinion Member
