@@ -14,7 +14,7 @@ const test = (req, res) => {
 
 //helper function
 const createJWT = (user) =>
-  jwt.sign({ user }, process.env.SECRET, { expiresIn: "10m" });
+  jwt.sign({ user }, process.env.SECRET, { expiresIn: "30s" }); //testing autologout //originally 10m
 
 // register
 const registerUser = async (req, res) => {

@@ -1,13 +1,38 @@
-import { useContext } from "react";
-import { Navigate, useLocation } from "react-router-dom";
+import { useContext, useEffect } from "react";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import toast from "react-hot-toast";
+import { isTokenExpired, removeToken } from "../utils/services/clientToken";
 
 const ProtectedRoute = ({ children }) => {
-  const { authUser } = useContext(AuthContext);
+  const { authUser, setAuthUser } = useContext(AuthContext);
   const location = useLocation();
+  const navigate = useNavigate();
 
   // authUser === null //handleTokenExpiration -->autologout & notify to login/register
+
+  useEffect(() => {
+    const checkTokenExpiration = () => {
+      if (isTokenExpired()) {
+        //notify user
+        toast("Session expired. Please log in again.", {
+          icon: "⚠️",
+        });
+        //autologout
+        setAuthUser(null);
+        removeToken();
+        navigate("/login", { state: { from: location } });
+      }
+    };
+
+    //immediately ceckTokenExpiration and use interval for periodic checks (5s)
+    checkTokenExpiration();
+
+    const interval = setInterval(checkTokenExpiration, 5000);
+
+    //clean up
+    return () => clearInterval(interval);
+  }, [navigate, setAuthUser, location]);
 
   if (!authUser) {
     toast("Login or Register", {
