@@ -13,6 +13,7 @@ As some things are quite subjective when it comes to housing opinions, it would 
 ## Getting Started- Planning
 
 ### Project Time Frame
+
 2 weeks
 
 ### Trello
@@ -20,7 +21,8 @@ As some things are quite subjective when it comes to housing opinions, it would 
 [Trello Board](https://trello.com/b/nMGA0Eyq/ga-sei-project-3)
 <img src="screenshots/trello.png">
 
-### WireFrame in [Figma](https://www.figma.com/board/tnVfWKHcX4gzCulPPkbyaR/Project-3?node-id=0%3A1&t=IE89gLKHWpSDTkl7-1) 
+### WireFrame in [Figma](https://www.figma.com/board/tnVfWKHcX4gzCulPPkbyaR/Project-3?node-id=0%3A1&t=IE89gLKHWpSDTkl7-1)
+
 <img src="screenshots/wireframe.png">
 
 ### Example Schema
@@ -32,7 +34,7 @@ As some things are quite subjective when it comes to housing opinions, it would 
 
 Try it here: (https://nestopinion.onrender.com/)
 
-## MERYL
+## [MERYL](https://github.com/Merylcheng)
 
 ### Landing Page
 
@@ -64,16 +66,14 @@ A property can have many reviews, which is a one-to-many relationship. Embedding
 
 Working on this project as a team requires clear communication and effective project management. I am grateful that my team is very efficient in setting direction and goals for the project. For me, documenting the process has been a huge part of this project. Spending time planning my schedule, estimating and visualizing what I can complete, strategizing on how to tackle errors, and setting mini to-do lists the day before helps me manage myself and ensure good overall team progression.
 
-
 ## [VANITA](https://github.com/vanitaar)
-
 
 ## [JANE](https://github.com/Janethq)
 
 ### Screenshots
 
 - The review form
-<img src="screenshots/reviewForm.png">
+  <img src="screenshots/reviewForm.png">
 
 - The reviews
 
@@ -82,37 +82,44 @@ Working on this project as a team requires clear communication and effective pro
 <img src="screenshots/reviewDetailsComponent.png">
 
 ### Routing Component
+
 <img src="screenshots/routing.png">
 
 ### CRUD
+
 - create
-<img src="screenshots/create.png">
+  <img src="screenshots/create.png">
 
 - read
-<img src="screenshots/read.png">
+  <img src="screenshots/read.png">
 
 - remove
-<img src="screenshots/delete.png">
+  <img src="screenshots/delete.png">
 
 ### Referencing
+
 - Mongoose Model
-<img src="screenshots/referencingmodel.png">
+  <img src="screenshots/referencingmodel.png">
 
 - Model's View
-<img src="screenshots/referencingreviewform.png">
+  <img src="screenshots/referencingreviewform.png">
 
 ### Biggest Challenge
+
 - referencing propertyID to each individual review
 
 ### Key Takeaways
+
 - Learnt how to navigate monorepo
 - Got more familiar with security concerns while creating an app
 
 ### Technologies Used
+
 -
 -
 
 ### Next Steps
+
 -
 -
 
