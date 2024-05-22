@@ -76,10 +76,15 @@ Working on this project as a team requires clear communication and effective pro
   <img src="screenshots/reviewForm.png">
 
 - The reviews
+  <img src="screenshots/reviewDetails.png">
 
 ### Favourite React Component
 
 <img src="screenshots/reviewDetailsComponent.png">
+
+- Allows for multiple queries
+<img src="screenshots/multiplequery1.png">
+<img src="screenshots/multiplequery2.png">
 
 ### Routing Component
 
