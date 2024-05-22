@@ -3,10 +3,8 @@ var router = express.Router();
 
 const {
   index,
-  create,
+  // create,
   search,
-  remove,
-  update,
   show,
   seed,
   featured,
@@ -14,10 +12,8 @@ const {
 
 router.get("/seed", seed);
 router.get("/", index);
-router.post("/", create);
+// router.post("/", create);
 router.get("/search", search);
-router.delete("/:id", remove);
-router.put("/:id", update);
 router.get("/:id", show);
 router.get("/featured", featured);
 
