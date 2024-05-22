@@ -24,7 +24,7 @@ function ReviewForm() {
       propertyId: id,
       time: e.target.time.value,
       rating: Number(e.target.rating.value),
-      looksNew: e.target.looksNew.value,
+      looksNew: e.target.looksNew.checked,
       pros: e.target.pros.value,
       cons: e.target.cons.value,
       reviewer: authUser._id,
