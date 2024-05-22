@@ -72,7 +72,11 @@ Try it here: (https://nestopinion.onrender.com/)
 - Got more familiar with security concerns while creating an app
 
 ### Technologies Used
+-
+-
 
 ### Next Steps
+-
+-
 
 ### QnA + Feedback
