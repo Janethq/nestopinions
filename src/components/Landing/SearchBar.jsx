@@ -111,7 +111,6 @@ function SearchBar() {
       </form>
 
       <div className="mt-8">
-        <h2 className="text-2xl font-bold mb-4">Search Results</h2>
         <ul className="space-y-4">
           {searchResults.map((property) => (
             <li
@@ -126,8 +125,8 @@ function SearchBar() {
                 />
                 <div>
                   <p className="text-gray-700 mb-2">
-                    {property.address}, {property.area}, {property.postalCode},{" "}
-                    {property.hdbType}, {property.distanceMrt}
+                    {property.address}, {property.area}, {property.postalCode},
+                    {property.hdbType}
                   </p>
                   <Link
                     to={`/property/${property._id}`}

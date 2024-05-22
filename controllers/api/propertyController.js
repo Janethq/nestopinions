@@ -1,6 +1,6 @@
 const Property = require("../../models/property");
 
-//SEED DATA FOR EASY ACCESS
+//SEED DATA
 const seedData = [
   {
     address: "525B Pasir Ris Street 51",
@@ -110,46 +110,13 @@ const seedData = [
   },
 ];
 
-// Seed properties
+//SEED PROPERTY
 const seed = async (req, res) => {
-  try {
-    //CLEAR EXISTING DATA
-    await Property.deleteMany({});
-    console.log("Existing data cleared");
-
-    // INSERT PROPERTIES WITHOUT REVIEWS FIRST
-    const properties = await Property.insertMany(
-      seedData.map((property) => ({
-        address: property.address,
-        postalCode: property.postalCode,
-        area: property.area,
-        distanceMrt: property.distanceMrt,
-        hdbType: property.hdbType,
-        imageUrl: property.imageUrl,
-      }))
-    );
-
-    console.log("Properties created");
-
-    // ADD & SAVE REVIEWS TO EACH PROPERTY
-    for (let i = 0; i < properties.length; i++) {
-      const property = properties[i];
-      const reviews = seedData[i].reviews.map((review) => ({
-        ...review,
-        propertyId: property._id,
-      }));
-
-      property.reviews = reviews;
-      await property.save();
-    }
-
-    console.log("Reviews added to properties");
-
-    res.status(201).json(properties);
-  } catch (error) {
-    console.error("Error seeding database:", error);
-    res.status(500).json({ error: error.message });
-  }
+  await Property.deleteMany({});
+  console.log("Existing data cleared");
+  const property = await Property.insertMany(seedData);
+  console.log("Database okay!");
+  res.status(201).json(property);
 };
 
 //SEE ALL PROPERTIES
@@ -209,26 +176,8 @@ const featured = async (req, res) => {
 
 module.exports = {
   index,
-  // create,
   search,
   show,
   seed,
   featured,
 };
-
-//CREATE PROPERTY
-// const create = async (req, res) => {
-//   const body = req.body;
-//   //taking whatever it received, dig into data, grabbin the body
-//   const property = await Property.create(body);
-//   res.status(201).json(property); //return what you created
-// };
-
-// //SEED PROPERTIES
-// const seed = async (req, res) => {
-//   await Property.deleteMany({});
-//   console.log("Existing data cleared");
-//   const property = await Property.insertMany(seedData);
-//   console.log("Database okay!");
-//   res.status(201).json(property);
-// };
