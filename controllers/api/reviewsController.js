@@ -1,3 +1,4 @@
+const Property = require("../../models/property");
 const Review = require("../../models/reviewModel");
 const User = require("../../models/user");
 const debug = require("debug")("mern:controllers:reviewsController");
@@ -22,13 +23,29 @@ const create = async (req, res) => {
       reviewer,
     });
 
-    // Save the new review to the database
-    const savedReview = await newReview.save();
+    // since it is embedded, have to construct and directly push in the NEW
+    // first find property
+    const property = await Property.findById(propertyId);
+    if (!property) {
+      return res.status(404).json({ message: "Property not found" });
+    }
+    // then add the review to the embedded reviews array
+    property.reviews.push(newReview);
+    // eslint-disable-next-line no-unused-vars
+    const savedProperty = await property.save();
 
     // Update user's reviewsPosted array
     await User.findByIdAndUpdate(reviewer, {
-      $push: { reviewsPosted: savedReview._id },
+      $push: { reviewsPosted: newReview._id }, // Store the review ID diff method due to embedding review-->property
     });
+
+    // Save the new review to the database
+    const savedReview = await newReview.save();
+
+    // // Update user's reviewsPosted array
+    // await User.findByIdAndUpdate(reviewer, {
+    //   $push: { reviewsPosted: savedReview._id },
+    // });
 
     res.status(201).json(savedReview);
   } catch (error) {

@@ -172,8 +172,9 @@ const deleteMyReview = async (req, res) => {
 
     // Update the Property model - remove the review from reviews
     await Property.findOneAndUpdate(
-      { _id: review.propertyId },
-      { $pull: { reviews: reviewId } }
+      { "reviews._id": reviewId }, //prev was:{ _id: review.propertyId } //change due to embedding
+      { $pull: { reviews: { _id: reviewId } } },
+      { new: true } // Ensure the updated document is returned
     );
 
     res.status(200).json({ message: "Review deleted successfully" });
