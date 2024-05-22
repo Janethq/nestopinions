@@ -35,7 +35,7 @@ const propertySchema = new Schema(
       type: String,
       required: true,
     },
-    reviews: [reviewSchema], // Embed the review schema
+    reviews: [reviewSchema],
   },
   {
     timestamps: true,
