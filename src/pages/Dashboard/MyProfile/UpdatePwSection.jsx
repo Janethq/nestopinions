@@ -4,7 +4,7 @@ import { AuthContext } from "../../../context/AuthContext";
 import { useContext } from "react";
 
 const UpdatePwSection = ({ currPw, setCurrPw, newPw, setNewPw }) => {
-  const { authUser } = useContext(AuthContext);
+  const { authUser, setAuthUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleUpdatePw = async (e) => {
@@ -29,6 +29,7 @@ const UpdatePwSection = ({ currPw, setCurrPw, newPw, setNewPw }) => {
       if (response.ok) {
         // Password update successful
         localStorage.removeItem("token"); // remove old JWT from local storage cos would cause auth issues
+        setAuthUser(null);
         toast.success("Password updated successfully. Required to re-login."); //notify user
         navigate("/login"); //redirect to login w new pw
       } else {
